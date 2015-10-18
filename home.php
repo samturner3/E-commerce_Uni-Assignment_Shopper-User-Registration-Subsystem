@@ -1,44 +1,46 @@
 <?php
-include_once 'includes/db_connect.php';
+include_once 'includes/db_connect_PDO.php';
 include_once 'includes/functions2.php';
 sec_session_start();
-if(login_check($mysqli) == true) {
+print_r($_SESSION);
+$db = db_connect();
+if(login_check($db) == true) {
         // Add your protected page content here!
-		
+
 		echo '<pre>';
 		var_dump($_SESSION);
 		echo '</pre>';
-		
-		
+
+
 		?>
 
 
-<?php 
-$Month = strtolower(date('M')); 
+<?php
+$Month = strtolower(date('M'));
 $MonthNumber = date('n');
 //$fileMonth = 'special_'."$Month";
 
 
 //ini_set('display_errors', '0');
 $message = '';
-$db = new MySQLi('localhost', 'user1', '', 'NewStarPS1');
-if ($db->connect_error) {
-	$message = $db->connect_error;	
+//$db = new MySQLi('localhost', 'user1', '', 'NewStarPS1');
+if ($db->errorInfo()) {
+	$message = $db->errorInfo();
 } else {
 	$sql = 'SELECT * FROM products WHERE product_type = "food" order by RAND() LIMIT 3';
 	$result = $db->query($sql);
 	$sqla = 'SELECT * FROM products WHERE product_type = "uniform" order by RAND() LIMIT 3';
 	$resulta = $db->query($sqla);
 	if ($db->error) {
-		$message = $db->error;	
+		$message = $db->error;
 	} else {
-		$row1 = $result->fetch_assoc();	
-		$row2 = $result->fetch_assoc();	
-		$row3 = $result->fetch_assoc();	
+		$row1 = $result->fetch_assoc();
+		$row2 = $result->fetch_assoc();
+		$row3 = $result->fetch_assoc();
 		$row4 = $resulta->fetch_assoc();
 		$row5 = $resulta->fetch_assoc();
 		$row6 = $resulta->fetch_assoc();
-		
+
 	}
 }
 ?>
@@ -60,7 +62,7 @@ if ($db->connect_error) {
 <body class="no_col_2">
 <div id="site">
 <?php require 'includes/pagetop.php'; ?>
-    
+
 <?php
 /* $siteroot points to the development folder.
    Reset it to an empty string when deploying the live site. */
@@ -69,7 +71,7 @@ if ($db->connect_error) {
 ?>
     <div id="content">
         <div id="col_1" role="main">
-            
+
             <div class="section">
                 <div class="title clearfix">
                     <h2>Our Most Popular Food Items</h2>
@@ -108,20 +110,20 @@ if ($db->connect_error) {
                             <h3 class="h4"><?php echo $row6['product_title']; ?></h3>
                             <p class="reset">From $<?php echo $row6['product_price']; ?></p>
                             </a> </li>
-                    
+
                 </ul>
             </div>
-            
-    
+
+
 <?php include 'includes/footer.php'; ?>
 <?php //print_r($SpecialAltText);?>
 </div>
-<script src="js/jquery-1.10.2.min.js"></script> 
+<script src="js/jquery-1.10.2.min.js"></script>
 <script src="js/scripts.js"></script>
 </body>
 </html>
-<?php 
-} else { 
+<?php
+} else {
         echo 'You are not authorized to access this page, please <a href="index.php">login</a>.';
 		echo '<pre>';
 		var_dump($_SESSION);
