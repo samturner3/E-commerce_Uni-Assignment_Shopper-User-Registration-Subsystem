@@ -131,7 +131,7 @@ function checkbrute($id, $db) {
 }
 
 function login_check($db) {
-    print_r($_SESSION['username']);
+ //   print_r($_SESSION['username']);
     // Check if all session variables are set
     if (isset($_SESSION['user_id'],
                         $_SESSION['username'],
