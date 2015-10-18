@@ -1,7 +1,7 @@
 <?php
 /* $siteroot points to the development folder.
    Reset it to an empty string when deploying the live site. */
-$siteroot = '/Comp344Ass2_PDO';
+$siteroot = '/comp344Ass2_PDO';
 //date_default_timezone_set('Australia/Sydney');
 include_once 'includes/db_connect_PDO.php';
 include_once 'includes/functions2.php';

@@ -1,7 +1,8 @@
 <?php
 include_once 'includes/register.inc3.php';
 include_once 'includes/functions2.php';
-
+error_reporting(E_ALL);
+ini_set('display_errors', 'on');
 ?>
 <!DOCTYPE html>
 <html>
