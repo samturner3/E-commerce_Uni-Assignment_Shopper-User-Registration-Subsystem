@@ -157,11 +157,16 @@ if (isset($_POST['fname'], $_POST['lname'], $_POST['hname'], $_POST['hcity'], $_
             }
 
 			}
-      //get shopper_id from newly created table.
-      $stmt = $db->prepare("SELECT shopper_id FROM shopper WHERE shopper.sh_email = ? LIMIT 1");
+			//get shopper_id from newly created table.
+
+			$shopper_id = $db->lastInsertId();
+			//the below code also works, as the email field is garunteed to be unique
+      /*$stmt = $db->prepare("SELECT shopper_id FROM shopper WHERE shopper.sh_email = ? LIMIT 1");
       $stmt->bindParam(1, $email);
       $stmt->execute();
-      $data = $stmt->fetch();
+      $data = $stmt->fetch();*/
+
+
 
 
 			 // Insert the new user into the database SHADDR
@@ -175,7 +180,7 @@ if (isset($_POST['fname'], $_POST['lname'], $_POST['hname'], $_POST['hcity'], $_
       $insert_stmt->bindParam(4, $hcity);
       $insert_stmt->bindParam(5, $hstate);
       $insert_stmt->bindParam(6, $hcode);
-      $insert_stmt->bindParam(7, $data['shopper_id']);
+      $insert_stmt->bindParam(7, $shopper_id);
 
             // Execute the prepared query.
             if (! $insert_stmt->execute()) {
@@ -203,7 +208,7 @@ if (isset($_POST['fname'], $_POST['lname'], $_POST['hname'], $_POST['hcity'], $_
 			$insert_stmt->bindParam(1, $ccard);
       $insert_stmt->bindParam(2, $ccexpmonth);
       $insert_stmt->bindParam(3, $ccexpyear);
-      $insert_stmt->bindParam(4, $data['shopper_id']);
+      $insert_stmt->bindParam(4, $shopper_id);
 
             // Execute the prepared query.
             if (! $insert_stmt->execute()) {
