@@ -19,9 +19,7 @@
     $stmt->bindParam(1, $shopper_id);
     $stmt->execute();
     $data = $stmt->fetch();
-    echo $oPass;
-    echo $nPass;
-    echo $conf;
+
       if (password_verify($oPass, $data['sh_password'])) {
         if(!password_verify($nPass, $data['sh_password'])){
           $password = password_hash($nPass, PASSWORD_DEFAULT);
@@ -29,7 +27,9 @@
           $stmt = $db->prepare($SQL);
           $stmt->bindParam(1,$password);
           $stmt->execute();
-          echo "Password changed successfully please return <a href='comp344Ass2_PDO/home.php'>Home</a>";
+          $_SESSION['login_string'] = hash('sha512', $password . $_SERVER['HTTP_USER_AGENT']);
+
+          echo "Password changed successfully please return <a href='/comp344Ass2_PDO/home.php'>Home</a>";
         }
         else{
           echo "New password must be different from old password";
