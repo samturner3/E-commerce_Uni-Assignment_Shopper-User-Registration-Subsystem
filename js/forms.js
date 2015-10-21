@@ -275,7 +275,7 @@ else {
     }
  }
 
-    // Create a new element input, this will be our hashed password field.
+    //double hashing not needed
     /*var p = document.createElement("input");
 
     // Add the new element to our form.
