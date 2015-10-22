@@ -20,7 +20,7 @@ if(login_check($db) == true) {
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>New Star Public School - User Account</title>
+<title>Address Book</title>
 <link rel="shortcut icon" href="images/NewStarSchoolLogoIcon.ico" type="image/x-icon">
 <link href="styles/ssmcCSS.css" rel="stylesheet" type="text/css">
 
@@ -44,7 +44,7 @@ if(login_check($db) == true) {
         if (login_check($db) == true) {
                         echo '<p>Currently logged ' . $logged . ' as ' . htmlentities($_SESSION['username']) . '.</p>';
 						echo '<p>Your name is: ' . htmlentities($_SESSION['fname']) . ' ' . htmlentities($_SESSION['lname']) . '.</p>';
-						echo '<p>You are in class: ' . htmlentities($_SESSION['sClass']) . '.</p>';
+					
 						echo '<p>Your Address is: ' . htmlentities($_SESSION['hname']) . ', ' . htmlentities($_SESSION['hcity']) . ', ' . htmlentities($_SESSION['hstate']) . '. ' . htmlentities($_SESSION['hcode']) . '</p>';
  //' . htmlentities($_SESSION['hnumber']) . '
             echo '<p>Do you want to change user? <a href="includes/logout.php">Log out</a>.</p>';

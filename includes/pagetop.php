@@ -24,8 +24,9 @@ if (login_check($db) == true) {
         <?php
 				if (login_check($db) == true) {
 					?>
-                <li>Hello <?php echo htmlentities($_SESSION['fname'])?> of <?php echo htmlentities($_SESSION['sClass'])?>   </li>
+                <li>Hello <?php echo htmlentities($_SESSION['fname'])?> </li>
       			<li><a href="<?php echo $siteroot; ?>/user_account.php">My Account</a></li>
+                <li><a href="<?php echo $siteroot; ?>/AddressBook.php">My Address Book</a></li>
                 <li><a href="<?php echo $siteroot; ?>/cart.php">View My Cart</a></li>
 				<li><a href="<?php echo $siteroot; ?>/includes/logout.php">Log Out</a></li>
         <li><a href="<?php echo $siteroot; ?>/pChange.php">Change Password</a></li>

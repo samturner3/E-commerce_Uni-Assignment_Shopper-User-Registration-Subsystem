@@ -170,8 +170,8 @@ if (isset($_POST['fname'], $_POST['lname'], $_POST['hname'], $_POST['hcity'], $_
 
 
 			 // Insert the new user into the database SHADDR
-        if ($insert_stmt = $db->prepare("INSERT INTO shaddr (sh_firstname, sh_familyname, sh_street1, sh_city, sh_state, sh_postcode, shopper_id)
-  											VALUES(?, ?, ?, ?, ?, ?, ?);"
+        if ($insert_stmt = $db->prepare("INSERT INTO shaddr (sh_firstname, sh_familyname, sh_street1, sh_city, sh_state, sh_postcode, shopper_id, own_entry)
+  											VALUES(?, ?, ?, ?, ?, ?, ?, ?);"
 											)){
             //$insert_stmt->bind_param('ssssssssss', $email, $username, $fname, $lname, $sClass, $email, $hname, $hcity, $hstate, $hcode);
       $insert_stmt->bindParam(1, $fname);
@@ -181,6 +181,7 @@ if (isset($_POST['fname'], $_POST['lname'], $_POST['hname'], $_POST['hcity'], $_
       $insert_stmt->bindParam(5, $hstate);
       $insert_stmt->bindParam(6, $hcode);
       $insert_stmt->bindParam(7, $shopper_id);
+	  $insert_stmt->bindParam(8, 1);
 
             // Execute the prepared query.
             if (! $insert_stmt->execute()) {
