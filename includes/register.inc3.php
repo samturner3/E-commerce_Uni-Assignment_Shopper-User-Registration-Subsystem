@@ -11,7 +11,7 @@ $error_array = array();
 $error_MissingValues_array = array();
 $form_values_array = array();
 
-if (isset($_POST['fname'], $_POST['lname'], $_POST['hname'], $_POST['hcity'], $_POST['hstate'], $_POST['hcode'], $_POST['sClass'], $_POST['username'], $_POST['email'], $_POST['ccard'], $_POST['ccexpmonth'], $_POST['ccexpyear'], $_POST['p']  )) {
+if (isset($_POST['fname'], $_POST['lname'], $_POST['hname'], $_POST['hcity'], $_POST['hstate'], $_POST['hcode'], $_POST['sClass'], $_POST['username'], $_POST['email'], $_POST['ccard'], $_POST['ccexpmonth'], $_POST['ccexpyear'], $_POST['password']  )) {
 	//echo $_POST['p'];
     // Sanitize and validate the data passed in and set them.
 	$fname = filter_input(INPUT_POST, 'fname', FILTER_SANITIZE_STRING);
@@ -25,8 +25,8 @@ if (isset($_POST['fname'], $_POST['lname'], $_POST['hname'], $_POST['hcity'], $_
 	$ccard = filter_input(INPUT_POST, 'ccard', FILTER_SANITIZE_STRING);
 	$ccexpmonth = filter_input(INPUT_POST, 'ccexpmonth', FILTER_SANITIZE_STRING);
 	$ccexpyear = filter_input(INPUT_POST, 'ccexpyear', FILTER_SANITIZE_STRING);
-	$p = filter_input(INPUT_POST, 'p', FILTER_SANITIZE_STRING);
-
+	$p = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+	echo $p;
 	// Add all elements to array
 
 	$form_values_array['First Name'] = $fname;
@@ -66,7 +66,7 @@ if (isset($_POST['fname'], $_POST['lname'], $_POST['hname'], $_POST['hcity'], $_
 
     }
 
-    $password = filter_input(INPUT_POST, 'p', FILTER_SANITIZE_STRING);
+    $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
     if (strlen($password) != 128) {
         // The hashed pwd should be 128 characters long.
         // If it's not, something really odd has happened
@@ -157,11 +157,16 @@ if (isset($_POST['fname'], $_POST['lname'], $_POST['hname'], $_POST['hcity'], $_
             }
 
 			}
-      //get shopper_id from newly created table.
-      $stmt = $db->prepare("SELECT shopper_id FROM shopper WHERE shopper.sh_email = ? LIMIT 1");
+			//get shopper_id from newly created table.
+
+			$shopper_id = $db->lastInsertId();
+			//the below code also works, as the email field is garunteed to be unique
+      /*$stmt = $db->prepare("SELECT shopper_id FROM shopper WHERE shopper.sh_email = ? LIMIT 1");
       $stmt->bindParam(1, $email);
       $stmt->execute();
-      $data = $stmt->fetch();
+      $data = $stmt->fetch();*/
+
+
 
 
 			 // Insert the new user into the database SHADDR
@@ -175,7 +180,7 @@ if (isset($_POST['fname'], $_POST['lname'], $_POST['hname'], $_POST['hcity'], $_
       $insert_stmt->bindParam(4, $hcity);
       $insert_stmt->bindParam(5, $hstate);
       $insert_stmt->bindParam(6, $hcode);
-      $insert_stmt->bindParam(7, $data['shopper_id']);
+      $insert_stmt->bindParam(7, $shopper_id);
 
             // Execute the prepared query.
             if (! $insert_stmt->execute()) {
@@ -203,7 +208,7 @@ if (isset($_POST['fname'], $_POST['lname'], $_POST['hname'], $_POST['hcity'], $_
 			$insert_stmt->bindParam(1, $ccard);
       $insert_stmt->bindParam(2, $ccexpmonth);
       $insert_stmt->bindParam(3, $ccexpyear);
-      $insert_stmt->bindParam(4, $data['shopper_id']);
+      $insert_stmt->bindParam(4, $shopper_id);
 
             // Execute the prepared query.
             if (! $insert_stmt->execute()) {
