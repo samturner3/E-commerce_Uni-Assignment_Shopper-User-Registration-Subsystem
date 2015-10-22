@@ -37,18 +37,7 @@
                 alert("New password and confirmation password must match");
                 return false;
               }
-              var p = document.createElement("input");
-              var n = document.createElement("input");
-              // Add the new element to our form.
-              form.appendChild(p);
-              form.appendChild(n);
 
-              p.name = "p";
-              p.type = "hidden";
-              p.value = hex_sha512(form.oPass.value);
-              n.name = "n";
-              n.type = "hidden";
-              n.value = hex_sha512(form.nPass.value);
               form.submit();
               return true;
             }
