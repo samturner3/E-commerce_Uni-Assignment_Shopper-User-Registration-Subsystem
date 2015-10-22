@@ -3,8 +3,8 @@
    Reset it to an empty string when deploying the live site. */
 $siteroot = '/comp344Ass2_PDO';
 //date_default_timezone_set('Australia/Sydney');
-include_once 'includes/db_connect_PDO.php';
-include_once 'includes/functions2.php';
+include_once 'db_connect_PDO.php';
+include_once 'functions2.php';
 
 $db = db_connect();
 
@@ -33,7 +33,7 @@ if (login_check($db) == true) {
 					<?php } else {
 						?><li><a href="<?php echo $siteroot; ?>/index.php">Log In</a></li>
                         <li><a href='<?php echo $siteroot; ?>/register.php'>Register</a></li>
-
+                        <li><a href='<?php echo $siteroot; ?>/forgot_password.php'>Forgot Password?</a></li>
                         <?php
 					}
 				?>
