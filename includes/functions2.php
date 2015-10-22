@@ -146,9 +146,9 @@ function login_check($db) {
 
         if ($stmt = $db->prepare("SELECT sh_password
                                       FROM shopper
-                                      WHERE sh_username = ? LIMIT 1")) {
+                                      WHERE shopper_id = ? LIMIT 1")) {
             // Bind "$user_id" to parameter.
-            $stmt->bindParam(1, $username);
+            $stmt->bindParam(1, $user_id);
             $stmt->execute();   // Execute the prepared query.
             //$stmt->store_result();
 

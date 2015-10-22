@@ -4,9 +4,9 @@ include_once 'functions2.php';
 
 sec_session_start(); // Custom secure way of starting a PHP session.
 
-if (isset($_POST['email'], $_POST['p'])) {
+if (isset($_POST['email'], $_POST['password'])) {
     $email = $_POST['email'];
-    $password = $_POST['p']; // The hashed password.
+    $password = $_POST['password'];
     $db = db_connect();
 
     if (login($email, $password, $db) == true) {

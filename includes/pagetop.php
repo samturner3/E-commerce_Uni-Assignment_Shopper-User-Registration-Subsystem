@@ -28,8 +28,10 @@ if (login_check($db) == true) {
       			<li><a href="<?php echo $siteroot; ?>/user_account.php">My Account</a></li>
                 <li><a href="<?php echo $siteroot; ?>/cart.php">View My Cart</a></li>
 				<li><a href="<?php echo $siteroot; ?>/includes/logout.php">Log Out</a></li>
+        <li><a href="<?php echo $siteroot; ?>/pChange.php">Change Password</a></li>
+
 					<?php } else {
-						?><li><a href="/comp344_ass1/index.php">Log In</a></li>
+						?><li><a href="<?php echo $siteroot; ?>/index.php">Log In</a></li>
                         <li><a href='<?php echo $siteroot; ?>/register.php'>Register</a></li>
 
                         <?php

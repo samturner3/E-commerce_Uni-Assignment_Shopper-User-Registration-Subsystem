@@ -11,7 +11,7 @@ $error_array = array();
 $error_MissingValues_array = array();
 $form_values_array = array();
 
-if (isset($_POST['fname'], $_POST['lname'], $_POST['hname'], $_POST['hcity'], $_POST['hstate'], $_POST['hcode'], $_POST['sClass'], $_POST['username'], $_POST['email'], $_POST['ccard'], $_POST['ccexpmonth'], $_POST['ccexpyear'], $_POST['p']  )) {
+if (isset($_POST['fname'], $_POST['lname'], $_POST['hname'], $_POST['hcity'], $_POST['hstate'], $_POST['hcode'], $_POST['sClass'], $_POST['username'], $_POST['email'], $_POST['ccard'], $_POST['ccexpmonth'], $_POST['ccexpyear'], $_POST['password']  )) {
 	//echo $_POST['p'];
     // Sanitize and validate the data passed in and set them.
 	$fname = filter_input(INPUT_POST, 'fname', FILTER_SANITIZE_STRING);
@@ -25,8 +25,8 @@ if (isset($_POST['fname'], $_POST['lname'], $_POST['hname'], $_POST['hcity'], $_
 	$ccard = filter_input(INPUT_POST, 'ccard', FILTER_SANITIZE_STRING);
 	$ccexpmonth = filter_input(INPUT_POST, 'ccexpmonth', FILTER_SANITIZE_STRING);
 	$ccexpyear = filter_input(INPUT_POST, 'ccexpyear', FILTER_SANITIZE_STRING);
-	$p = filter_input(INPUT_POST, 'p', FILTER_SANITIZE_STRING);
-
+	$p = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+	echo $p;
 	// Add all elements to array
 
 	$form_values_array['First Name'] = $fname;
@@ -66,7 +66,7 @@ if (isset($_POST['fname'], $_POST['lname'], $_POST['hname'], $_POST['hcity'], $_
 
     }
 
-    $password = filter_input(INPUT_POST, 'p', FILTER_SANITIZE_STRING);
+    $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
     if (strlen($password) != 128) {
         // The hashed pwd should be 128 characters long.
         // If it's not, something really odd has happened
