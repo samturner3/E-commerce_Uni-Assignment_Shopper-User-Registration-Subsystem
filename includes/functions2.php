@@ -192,7 +192,10 @@ function login_check($db) {
     }
 }
 
+//function to change password when the user is logged in
 function change_password($shopper_id){
+  //filter all inputs
+  //$shopper_id is directly from database, so no need to filter
   $db = db_connect();
   $oPass = filter_input(INPUT_POST, 'oPass', FILTER_SANITIZE_STRING);
   $nPass = filter_input(INPUT_POST, 'nPass', FILTER_SANITIZE_STRING);
@@ -205,6 +208,7 @@ function change_password($shopper_id){
   $stmt->execute();
   $data = $stmt->fetch();
 
+//validate password format
   $passreg = "/(?=.*[0-9].*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8}/";
   if(!strlen($oPass)==8 || !strlen($nPass)==8 || !strlen($conf)==8){
     exit("Passwords must be 8 characters long");
@@ -213,15 +217,20 @@ function change_password($shopper_id){
     exit("Passwords must contain at least two numbers, at least one lowercase and at least one uppercase letter, and be 8 characters long.  Please try again.");
   }
 
+//only change password if the user changes it to something different,
+//enters their old password correctly, and has their confirmation password matching their new one
   if (password_verify($oPass, $data['sh_password'])) {
     if(!password_verify($nPass, $data['sh_password'])){
       if($nPass == $conf){
+        //hash new password
         $password = password_hash($nPass, PASSWORD_DEFAULT);
+        //update new password to table
         $SQL = "UPDATE shopper SET sh_password=? WHERE shopper_id=?";
         $stmt = $db->prepare($SQL);
         $stmt->bindParam(1,$password);
         $stmt->bindParam(2, $_SESSION[user_id]);
         $stmt->execute();
+        //update login string so user isn't logged out
         $_SESSION['login_string'] = hash('sha512', $password . $_SERVER['HTTP_USER_AGENT']);
 
         echo "Password changed successfully please return <a href='/comp344Ass2_PDO/home.php'>Home</a>";

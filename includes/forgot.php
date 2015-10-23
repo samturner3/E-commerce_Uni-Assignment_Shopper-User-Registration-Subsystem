@@ -4,7 +4,9 @@
   sec_session_start();
   $db = db_connect();
   $siteroot = "localhost/comp344Ass2_PDO";
+  //If user is directed here from the email form, send them a reset link
   if(isset($_POST['email'])){
+    //validate email
     $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
     $emailreg ='/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i';
     if(!preg_match($emailreg,$email)){
@@ -33,26 +35,34 @@
     $stmt->bindParam(2,$user_id);
     $stmt->execute();
 
+    //generate reset link and email
     $link =$siteroot . "/includes/forgot.php?" . $token;
-    echo $email;
+    //echo $email;
     $message = "Please follow this link to reset your password " . $link;
+    //send email to customer
     mail($email, "Password Reset", $message, "From: jacob.williams@students.mq.edu.au");
     echo "A reset link has been sent to your email address";
     exit;
   }
 
+//if customer is directed to this page from their email link, let them change their password
   if(isset($_SERVER['QUERY_STRING']) && !empty($_SERVER['QUERY_STRING'])){
+    //sanitise token to avoid SQL injection
     $token = filter_input(INPUT_SERVER, 'QUERY_STRING', FILTER_SANITIZE_STRING);
     //echo $token;
+    //get shopper id using token
     $SQL = "SELECT shopper_id FROM  pwdreset WHERE link=? LIMIT 1";
     $stmt = $db->prepare($SQL);
     $stmt->bindParam(1,$token);
     $stmt->execute();
+    //send user to homepage if incorrect link
     if($stmt->rowCount() != 1){
       exit("Incorrect link. please return <a href='../index.php'>Home</a>");
     }
     $data = $stmt->fetch();
     $user_id=$data['shopper_id'];
+
+    //generate password reset form
     ?>
     <!DOCTYPE html>
     <html>
@@ -69,6 +79,7 @@
             <script src="sliderengine/initslider-1.js"></script>
 
             <script type="text/JavaScript">
+            //validate password format
             function checkPass(form){
               if (form.nPass.value.length !== 8 || form.conf.value.length !== 8){
                 alert("Passwords must be exactly 8 characters long.  Please try again.");
@@ -97,13 +108,15 @@
             <div id="site">
               <?php require 'pagetop.php'; ?>
               <div id="logonBox">
+                <!--Redirect user to change_password.php when they submit form -->
                 <form action="change_password.php" method="post" name="password_form">
 
                     New Password: <input type="password" name="nPass" id="nPass" size="35"/>
                     <br>
                     Confirm Password: <input type="password" name = "conf" id="conf" size="35"/>
                     <input type="hidden" name="user_id" value="<?php echo $user_id ?>"/>
-                    <input type "hidden" name="pType" value="forgot"/>
+                    <!--pType tells change_password what function to execute-->
+                    <input type="hidden" name="pType" value="forgot"/>
                     <br><br>
 
 

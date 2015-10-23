@@ -3,10 +3,13 @@
   include_once 'includes/functions2.php';
   sec_session_start();
   $db = db_connect();
+  //can't see this page if logged in
   if(login_check($db)==true){
     header('Location: ./home.php');
   }
   else{
+    //Generate forgot password form
+    //form redirects to forgot.php when submitted
     ?>
     <!DOCTYPE html>
     <html>
