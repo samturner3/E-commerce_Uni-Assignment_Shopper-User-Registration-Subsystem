@@ -34,11 +34,13 @@
     $stmt->execute();
 
     $link =$siteroot . "/includes/forgot.php?" . $token;
-    //echo $link;
+    echo $email;
     $message = "Please follow this link to reset your password " . $link;
     mail($email, "Password Reset", $message, "From: jacob.williams@students.mq.edu.au");
     echo "A reset link has been sent to your email address";
+    exit;
   }
+
   if(isset($_SERVER['QUERY_STRING']) && !empty($_SERVER['QUERY_STRING'])){
     $token = filter_input(INPUT_SERVER, 'QUERY_STRING', FILTER_SANITIZE_STRING);
     //echo $token;
@@ -49,6 +51,8 @@
     if($stmt->rowCount() != 1){
       exit("Incorrect link. please return <a href='../index.php'>Home</a>");
     }
+    $data = $stmt->fetch();
+    $user_id=$data['shopper_id'];
     ?>
     <!DOCTYPE html>
     <html>
@@ -93,12 +97,15 @@
             <div id="site">
               <?php require 'pagetop.php'; ?>
               <div id="logonBox">
-                <form action="includes/change_password.php" method="post" name="password_form">
+                <form action="change_password.php" method="post" name="password_form">
 
                     New Password: <input type="password" name="nPass" id="nPass" size="35"/>
                     <br>
                     Confirm Password: <input type="password" name = "conf" id="conf" size="35"/>
+                    <input type="hidden" name="user_id" value="<?php echo $user_id ?>"/>
+                    <input type "hidden" name="pType" value="forgot"/>
                     <br><br>
+
 
                     <input type="button"
                            value="Change Password"
@@ -109,5 +116,6 @@
           </body>
         </html>
     <?php
+
   }
  ?>

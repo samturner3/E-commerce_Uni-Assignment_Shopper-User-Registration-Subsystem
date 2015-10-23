@@ -5,6 +5,7 @@
   print_r($_SESSION);
   $db = db_connect();
   if(login_check($db) == true) {
+    $_SESSION['pchange'] = "change";
     ?>
     <!DOCTYPE html>
     <html>
@@ -37,7 +38,6 @@
                 alert("New password and confirmation password must match");
                 return false;
               }
-
               form.submit();
               return true;
             }
@@ -55,6 +55,7 @@
                     New Password: <input type="password" name="nPass" id="nPass" size="35"/>
                     <br>
                     Confirm Password: <input type="password" name = "conf" id="conf" size="35"/>
+                    <input type="hidden" name="pType" value="change"/>
                     <br><br>
 
                     <input type="button"
