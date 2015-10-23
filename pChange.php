@@ -5,11 +5,12 @@
   print_r($_SESSION);
   $db = db_connect();
   if(login_check($db) == true) {
+    $_SESSION['pchange'] = "change";
     ?>
     <!DOCTYPE html>
     <html>
         <head>
-            <title>Secure Login: Log In</title>
+            <title>Change Password</title>
             <link rel="shortcut icon" href="images/NewStarSchoolLogoIcon.ico" type="image/x-icon">
             <link href="styles/ssmcCSS.css" rel="stylesheet" type="text/css" />
             <link href="styles/css/font-awesome.css" rel="stylesheet" type="text/css" />
@@ -37,18 +38,6 @@
                 alert("New password and confirmation password must match");
                 return false;
               }
-              var p = document.createElement("input");
-              var n = document.createElement("input");
-              // Add the new element to our form.
-              form.appendChild(p);
-              form.appendChild(n);
-
-              p.name = "p";
-              p.type = "hidden";
-              p.value = hex_sha512(form.oPass.value);
-              n.name = "n";
-              n.type = "hidden";
-              n.value = hex_sha512(form.nPass.value);
               form.submit();
               return true;
             }
@@ -66,6 +55,7 @@
                     New Password: <input type="password" name="nPass" id="nPass" size="35"/>
                     <br>
                     Confirm Password: <input type="password" name = "conf" id="conf" size="35"/>
+                    <input type="hidden" name="pType" value="change"/>
                     <br><br>
 
                     <input type="button"
