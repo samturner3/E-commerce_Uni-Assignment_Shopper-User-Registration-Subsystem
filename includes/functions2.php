@@ -263,6 +263,7 @@ function forgot_password(){
     if(!preg_match($passreg, $nPass) || !preg_match($passreg, $conf)){
       exit("Passwords must contain at least two numbers, at least one lowercase and at least one uppercase letter, and be 8 characters long.  Please try again.");
     }
+    //make sure passwords match
     if($nPass != $conf){
       exit("Password and confirmation must be the same");
     }
