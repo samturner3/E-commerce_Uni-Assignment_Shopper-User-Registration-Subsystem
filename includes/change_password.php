@@ -18,7 +18,7 @@
     if(isset($_POST['nPass'], $_POST['conf'], $_POST['user_id'])){
       forgot_password();
       //ask user to log in with new password
-      echo "Password changed. You can now <a href='../index.php>log in</a>'";
+      echo "Password changed. You can now <a href='../index.php'>log in</a>";
     }
   }
 ?>
