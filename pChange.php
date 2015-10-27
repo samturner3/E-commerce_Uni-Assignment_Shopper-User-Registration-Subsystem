@@ -63,6 +63,7 @@
                            onclick="checkPass(this.form);" />
                 </form>
               </div>
+              <?php include 'includes/footer.php'; ?>
             </div>
           </body>
         </html>

@@ -20,6 +20,12 @@ else if ($dbloc == "local") {
 	$dbuserpassword = '';
 	$default_dbname = 'user_registration';
 }
+else if ($dbloc == "discoBuzzServer") {
+	$dbhost = 'localhost';
+	$dbusername = 'discobuz_comp344';
+	$dbuserpassword = 'comp344';
+	$default_dbname = 'discobuz_user_registration';
+}
 
 
 // Use PDO to connect to the database; return the PDO object

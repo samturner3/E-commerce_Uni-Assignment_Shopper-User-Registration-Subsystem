@@ -82,6 +82,7 @@ if (login_check($db) == true) {
         } else {
                         echo '<p>Currently logged ' . $logged . '.</p>';
                         echo "<p>If you don't have a login, please <a href='register.php'>register</a></p>";
+						echo '<a href=\''.$siteroot.'/forgot_password.php\'>Forgot Password?</a>';
                 }
 ?>
 </div>
