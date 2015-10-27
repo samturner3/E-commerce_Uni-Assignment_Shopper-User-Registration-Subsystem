@@ -12,6 +12,13 @@ if (login_check($db) == true) {
 
 if(login_check($db) == true) {
         // Add your protected page content here!
+		
+	if(isset($_POST['delete']))
+	{
+		delete_addressBook(($_POST['IDtoDelete']));
+		
+	}
+		
 		?>
 
 
@@ -43,7 +50,7 @@ if(login_check($db) == true) {
            <?php
 		   //Get Own Info
 		   $shopper_id = $_SESSION['user_id'];
-        if ($stmt = $db->prepare("SELECT sh_firstname, sh_familyname, sh_street1, sh_street2, sh_city, sh_state, sh_postcode, sh_country
+        if ($stmt = $db->prepare("SELECT sh_firstname, sh_familyname, sh_street1, sh_street2, sh_city, sh_state, sh_postcode, sh_country, shaddr_id
 									from shaddr
 									INNER JOIN shopper
 									ON shaddr.shopper_id = shopper.shopper_id  
@@ -57,7 +64,7 @@ if(login_check($db) == true) {
 		   
 		   ///Get All Contacts
 		   $shopper_id = $_SESSION['user_id'];
-        if ($stmt = $db->prepare("SELECT sh_firstname, sh_familyname, sh_street1, sh_street2, sh_city, sh_state, sh_postcode, sh_country
+        if ($stmt = $db->prepare("SELECT sh_firstname, sh_familyname, sh_street1, sh_street2, sh_city, sh_state, sh_postcode, sh_country, shaddr_id
 									from shaddr
 									INNER JOIN shopper
 									ON shaddr.shopper_id = shopper.shopper_id  
@@ -67,13 +74,29 @@ if(login_check($db) == true) {
         $stmt->execute();    // Execute the prepared query.
 
         $contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		
+		}
 		
 		
 	
 		
 		?>
         <h2>Your Information</h2>
+        
+        <?php 
+		$ownUpdateLink = ('<td> <a href="updateAddressBook.php?'.$own[0]['shaddr_id'].'"><img src="images/Update.png" alt=""/> </a></td>');
+		$contactsId = array();
+		//echo $ownUpdateLink;
+		
+		for ($i = 0; $i < count($contacts); ++$i) {
+			array_push($contactsId,$contacts[$i]['shaddr_id']);  
+			unset($contacts[$i]['shaddr_id']);
+		}
+		
+		
+		unset($own[0]['shaddr_id']);
+		
+		
+		?>
         
         <div class="CSSTableGenerator" >
 			<table> 
@@ -104,13 +127,14 @@ if(login_check($db) == true) {
             </td>
              <td>
             Update
+            
             </td>
 			<?php foreach($own as $row) {
 		  	echo('<tr>');
 		  	foreach($row as $cell) {
 				echo('<td>' . $cell . '</td>');
 		  	}
-			echo('<td> <img src="images/Update.png" alt=""/> </td>');
+			echo $ownUpdateLink ;
 		 	echo('</tr>');
 			} ?>            
 			</table>
@@ -160,14 +184,28 @@ if(login_check($db) == true) {
              <td>
             Delete
             </td>
-			<?php foreach($contacts as $row) {
+			<?php 
+			$i = -1;
+			foreach($contacts as $row) {
+			$i++;
 		  	echo('<tr>');
 		  	foreach($row as $cell) {
 				echo('<td>' . $cell . '</td>');
 		  	}
-			echo('<td> <img src="images/Update.png" alt=""/> </td>');
-			echo('<td> <img src="images/delete-17.png" alt=""/> </td>');
+			
+			echo('<td> <a href="includes/updateAddressBook.php?'.$contactsId[$i].'"><img src="images/Update.png" alt=""/> </a></td>');
+			?>
+            <td>
+			<form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+				<input hidden type="text" name="IDtoDelete" value="<?php echo $contactsId[$i]; ?>">
+				<input type="submit" value="delete" name="delete">
+			</form>
+			</td>
+			
+			<?php
+			//echo('<td> <a href="includes/deleteAddressBook.php?'.$contactsId[$i].'"><img src="images/delete-17.png" alt=""/> </a></td>');
 		 	echo('</tr>');
+
 			} ?>            
 			</table>
 			
@@ -233,7 +271,7 @@ if(login_check($db) == true) {
 	<?php	
 		
 		
-		}
+		
 ?>
             </div>
 

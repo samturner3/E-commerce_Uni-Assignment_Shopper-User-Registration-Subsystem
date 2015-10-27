@@ -15,16 +15,17 @@ if ($thisYear > $startYear) {
     <?php if (login_check($db) == true) {
 					?>
             <ul class="reset menu hover">
-                <li><a href="<?php echo $siteroot; ?>/food_only.php">Food Items</a></li>
-                <li><a href="<?php echo $siteroot; ?>/uniform_only.php">All Uniform Items</a></li>
-                <li><a href="#">Tops</a></li>
-                <li><a href="#">Pants</a></li>
-                <li><a href="#">Accessories</a></li>
+                <li><a href="#">Nav1</a></li>
+                <li><a href="#">Nav2</a></li>
+                <li><a href="#">Nav3</a></li>
+                <li><a href="#">Nav4</a></li>
+                <li><a href="#">Nav5</a></li>
 
             </ul>
             <ul class="reset menu hover">
-                <li><a #">My Cart</a></li>
+                <li><a href="<?php echo $siteroot; ?>/AddressBook.php">My Address Book</a></li>
                 <li><a href="<?php echo $siteroot; ?>/user_account.php">My Account</a></li>
+                <li><a href="<?php echo $siteroot; ?>/pChange.php">Change Password</a></li>
                 <li><a href="<?php echo $siteroot; ?>/includes/logout.php">Log Off</a></li>
             </ul>
                <?php }
@@ -38,10 +39,10 @@ if ($thisYear > $startYear) {
 				   <?php }
 				   ?>
           <ul class="reset menu hover">
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Our Suppliers</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms &amp; Conditions</a></li>
+                <li><a href="#">Nav7</a></li>
+                <li><a href="#">Nav8</a></li>
+                <li><a href="#">Nav9</a></li>
+                <li><a href="#">Nav10</a></li>
           </ul>
 
           <img src="<?php echo $siteroot; ?>/images/NewStarSchoolLogoOnly.png" alt="New Star Public Schhol" width="157"> </div>

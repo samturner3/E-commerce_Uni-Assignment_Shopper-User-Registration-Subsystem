@@ -1,5 +1,6 @@
 <?php
 include_once 'db_connect_PDO.php';
+$siteroot = '/comp344Ass2_PDO';
 
 function sec_session_start() {
     $session_name = 'sec_session_id';   // Set a custom session name
@@ -313,4 +314,43 @@ function esc_url($url) {
     } else {
         return $url;
     }
+}
+
+function update_addressBook(){
+  //sanitise all form inputs
+   
+}
+
+function delete_addressBook($deleteID){
+  
+    $db = db_connect();
+ 
+
+	$SQL="SELECT sh_firstname, sh_familyname FROM shaddr WHERE shaddr_id=?";
+    $stmt = $db->prepare($SQL);
+    $stmt->bindParam(1, $deleteID);
+    $stmt->execute();
+	$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $SQL="DELETE FROM shaddr WHERE shaddr_id=?";
+    $stmt = $db->prepare($SQL);
+    $stmt->bindParam(1, $deleteID);
+    $stmt->execute();
+	
+	
+	echo "<script>
+	alert('".$data[0]['sh_firstname']." ".$data[0]['sh_familyname']." Deleted!');
+	window.location.href='AddressBook.php';
+	</script>";
+	
+	
+	//window.location.href='AddressBook.php';
+	
+	//echo "<script>window.location.href='AddressBook.php'
+	
+	/*//echo ('<SCRIPT LANGUAGE=\'JavaScript\'>
+    window.alert(\''.$data[0]['sh_firstname'].' '.$data[0]['sh_familyname'].' Deleted!\')
+    window.location.href=comp344Ass2_PDO/AddressBook.php\';
+    </SCRIPT>');*/
+
 }
