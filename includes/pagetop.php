@@ -27,7 +27,7 @@ if (login_check($db) == true) {
                 <li>Hello <?php echo htmlentities($_SESSION['fname'])?> </li>
       			<li><a href="<?php echo $siteroot; ?>/user_account.php">My Account</a></li>
                 <li><a href="<?php echo $siteroot; ?>/AddressBook.php">My Address Book</a></li>
-                <li><a href="<?php echo $siteroot; ?>/cart.php">View My Cart</a></li>
+                <li><a href="#">View My Cart</a></li>
 				<li><a href="<?php echo $siteroot; ?>/includes/logout.php">Log Out</a></li>
         <li><a href="<?php echo $siteroot; ?>/pChange.php">Change Password</a></li>
 
@@ -49,13 +49,13 @@ if (login_check($db) == true) {
 					?>
         <ul>
             <li><a href="<?php echo $siteroot; ?>/home.php"><span>Home</span></a></li>
-            <li><a href="<?php echo $siteroot; ?>/food_only.php"><span>Food</span></a></li>
-            <li><a href="<?php echo $siteroot; ?>/uniform_only.php"><span>Uniforms</span></a></li>
-            <li> <a href="#" class="parent"><span>About Us</span></a>
+            <li><a href="#"><span>Nav1</span></a></li>
+            <li><a href="#"><span>Nav2</span></a></li>
+            <li> <a href="#" class="parent"><span>Nav3</span></a>
                 <div class="single_column">
                     <ul>
-                        <li><a href="#">History</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Nav3.1</a></li>
+                        <li><a href="#">Nav3.2</a></li>
                     </ul>
                 </div>
             </li>

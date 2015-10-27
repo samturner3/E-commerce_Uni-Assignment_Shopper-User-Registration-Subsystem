@@ -2,48 +2,13 @@
 include_once 'includes/db_connect_PDO.php';
 include_once 'includes/functions2.php';
 sec_session_start();
-print_r($_SESSION);
+//print_r($_SESSION);
 $db = db_connect();
 if(login_check($db) == true) {
         // Add your protected page content here!
 
-		echo '<pre>';
-		var_dump($_SESSION);
-		echo '</pre>';
-
-
 		?>
 
-
-<?php
-$Month = strtolower(date('M'));
-$MonthNumber = date('n');
-//$fileMonth = 'special_'."$Month";
-
-
-//ini_set('display_errors', '0');
-$message = '';
-//$db = new MySQLi('localhost', 'user1', '', 'NewStarPS1');
-if ($db->errorInfo()) {
-	$message = $db->errorInfo();
-} else {
-	$sql = 'SELECT * FROM products WHERE product_type = "food" order by RAND() LIMIT 3';
-	$result = $db->query($sql);
-	$sqla = 'SELECT * FROM products WHERE product_type = "uniform" order by RAND() LIMIT 3';
-	$resulta = $db->query($sqla);
-	if ($db->error) {
-		$message = $db->error;
-	} else {
-		$row1 = $result->fetch_assoc();
-		$row2 = $result->fetch_assoc();
-		$row3 = $result->fetch_assoc();
-		$row4 = $resulta->fetch_assoc();
-		$row5 = $resulta->fetch_assoc();
-		$row6 = $resulta->fetch_assoc();
-
-	}
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,46 +36,27 @@ if ($db->errorInfo()) {
 ?>
     <div id="content">
         <div id="col_1" role="main">
-
+			<h1>Home</h1>
             <div class="section">
                 <div class="title clearfix">
-                    <h2>Our Most Popular Food Items</h2>
-                    <p class="h3"><a href="<?php echo $siteroot; ?>/food_only.php" class="feature">Browse All Food Items</a></p>
+                    <h2>Section 1</h2>
+                    <p class="h3"><a href="#" class="feature">Browse All ></a></p>
                 </div>
                 <ul class="reset tiles x3">
-                    <li> <a href="details.php?product_id=<?php echo $row1['product_id']; ?>"> <img src="images/productImages/<?php echo $row1['product_image']; ?>.jpg" alt="<?php echo $row1['product_alt']; ?>" height="200" width="200">
-                            <h3 class="h4"><?php echo $row1['product_title']; ?></h3>
-                            <p class="reset">From $<?php echo $row1['product_price']; ?></p>
-                            </a> </li>
-                    <li> <a href="details.php?product_id=<?php echo $row2['product_id']; ?>"> <img src="images/productImages/<?php echo $row2['product_image']; ?>.jpg" alt="<?php echo $row2['product_alt']; ?>" height="200" width="200">
-                            <h3 class="h4"><?php echo $row2['product_title']; ?></h3>
-                            <p class="reset">From $<?php echo $row2['product_price']; ?></p>
-                            </a> </li>
-                    <li> <a href="details.php?product_id=<?php echo $row3['product_id']; ?>"> <img src="images/productImages/<?php echo $row3['product_image']; ?>.jpg" alt="<?php echo $row3['product_alt']; ?>" height="200" width="200">
-                            <h3 class="h4"><?php echo $row3['product_title']; ?></h3>
-                            <p class="reset">From $<?php echo $row3['product_price']; ?></p>
-                            </a> </li>
+                    <li> Item 1 </li>
+                   <li> Item 2 </li>
+                   <li> Item 3 </li>
                 </ul>
             </div>
             <div class="section">
                 <div class="title clearfix">
-                    <h2>Uniforms</h2>
-                    <p class="h3"><a href="<?php echo $siteroot; ?>/uniform_only.php" class="feature">Browse All Uniforms</a></p>
+                    <h2>Section 2</h2>
+                    <p class="h3"><a href="#" class="feature">Browse All 2 ></a></p>
                 </div>
                 <ul class="reset tiles">
-                    <li> <a href="details.php?product_id=<?php echo $row4['product_id']; ?>"> <img src="images/productImages/<?php echo $row4['product_image']; ?>.jpg" alt="<?php echo $row4['product_alt']; ?>" height="200" width="200">
-                            <h3 class="h4"><?php echo $row4['product_title']; ?></h3>
-                            <p class="reset">From $<?php echo $row4['product_price']; ?></p>
-                            </a> </li>
-                    <li> <a href="details.php?product_id=<?php echo $row5['product_id']; ?>"> <img src="images/productImages/<?php echo $row5['product_image']; ?>.jpg" alt="<?php echo $row5['product_alt']; ?>" height="200" width="200">
-                            <h3 class="h4"><?php echo $row5['product_title']; ?></h3>
-                            <p class="reset">From $<?php echo $row5['product_price']; ?></p>
-                            </a> </li>
-                    <li> <a href="details.php?product_id=<?php echo $row6['product_id']; ?>"> <img src="images/productImages/<?php echo $row6['product_image']; ?>.jpg" alt="<?php echo $row6['product_alt']; ?>" height="200" width="200">
-                            <h3 class="h4"><?php echo $row6['product_title']; ?></h3>
-                            <p class="reset">From $<?php echo $row6['product_price']; ?></p>
-                            </a> </li>
-
+                     <li> Item 1 </li>
+                   <li> Item 2 </li>
+                   <li> Item 3 </li>
                 </ul>
             </div>
 

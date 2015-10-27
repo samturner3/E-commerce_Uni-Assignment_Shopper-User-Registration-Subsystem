@@ -1,5 +1,6 @@
 <?php
 include_once 'db_connect_PDO.php';
+$siteroot = '/comp344Ass2_PDO';
 
 function sec_session_start() {
     $session_name = 'sec_session_id';   // Set a custom session name
@@ -337,8 +338,19 @@ function delete_addressBook($deleteID){
     $stmt->execute();
 	
 	
-	echo '<script>alert(\''.$data[0]['sh_firstname'].' '.$data[0]['sh_familyname'].' Deleted!\');</script>';
+	echo "<script>
+	alert('".$data[0]['sh_firstname']." ".$data[0]['sh_familyname']." Deleted!');
+	window.location.href='AddressBook.php';
+	</script>";
 	
 	
+	//window.location.href='AddressBook.php';
+	
+	//echo "<script>window.location.href='AddressBook.php'
+	
+	/*//echo ('<SCRIPT LANGUAGE=\'JavaScript\'>
+    window.alert(\''.$data[0]['sh_firstname'].' '.$data[0]['sh_familyname'].' Deleted!\')
+    window.location.href=comp344Ass2_PDO/AddressBook.php\';
+    </SCRIPT>');*/
 
 }
