@@ -1,7 +1,6 @@
 <?php
 include_once 'db_connect_PDO.php';
 //include_once 'psl-config.php';
-require_once 'swiftmailer-5.x/lib/swift_required.php';
 
 $db = db_connect();
 
