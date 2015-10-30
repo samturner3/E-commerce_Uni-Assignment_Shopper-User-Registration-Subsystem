@@ -9,31 +9,16 @@ ini_set('display_errors', 'on');
     <head>
         <meta charset="UTF-8">
         <title>Secure Login: Registration Form</title>
+        <link rel="shortcut icon" href="images/NewStarSchoolLogoIcon.ico" type="image/x-icon">
         <script type="text/JavaScript" src="js/sha512.js"></script> 
         <script type="text/JavaScript" src="js/forms.js"></script>
         
-<head>
-      <!--Import Google Icon Font-->
-      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-
-      <!--Let browser know website is optimized for mobile-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-
-    <body>
-      <!--Import jQuery before materialize.js-->
-      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-      <script type="text/javascript" src="js/materialize.min.js"></script>
-
-    </body>
+        <link href="styles/ssmcCSS.css" rel="stylesheet" type="text/css" />
+        <link href="styles/css/font-awesome.css" rel="stylesheet" type="text/css" />
 		<?php include_once 'includes/HeadScrips.php';?>
 
     </head>
-<body>
-<div class="container">
-        <!-- Page Content goes here -->
+<body class="no_col_2">
 <div id="site">
        
         <?php require 'includes/pagetop.php'; ?>
@@ -98,72 +83,62 @@ ini_set('display_errors', 'on');
                      
         </div>
         <div id="regBox">
-
-
-
-<div class="card-panel"
-	<div class="row">
+        
         <form id="myform" action="<?php echo esc_url($_SERVER['PHP_SELF']); ?>" 
                 method="post" 
                 name="registration_form"
              	>
-				
-		<form class="col s12">
-		<h3>Personal Information</h3>
-			<div class="row">
-				<div class="input-field col s6">
-
-		  		<input type="text" name="fname" id="fname" size="35" class="validate" <?php if (isset($_POST['fname'])) echo 'value="'.$_POST['fname'].'"';?>/>
-				<label for="fname">First Name</label>
-				
-				</div>
-				
-				<div class="input-field col s6">
-					<input type="text" name="lname" id="lname" size="35" class="validate" <?php if (isset($_POST['lname'])) echo 'value="'.$_POST['lname'].'"';?>/><br><br>
-					<label for"lname">Last Name</label>
-				</div>
-			</div>    
-           <h3> Address </h3>
-		   
-			<div class="row">
-				<div class="input-field col s12">
-				<input type="text" name="hname" id="hname" size="35" class="validate" <?php if (isset($_POST['hname'])) echo 'value="'.$_POST['hname'].'"';?>/><br>
-				<label for="hname">Street Number with Street Address</label>
-				</div>
-			</div>
-			
-		   <div class="row">
-				<div class="input-field col s12">
-					<input type="text" name="hcity" id="hcity" size="35" class="validate"<?php if (isset($_POST['hcity'])) echo 'value="'.$_POST['hcity'].'"';?>/><br>
-					<label for=hcity>Surburb/City</label>
-				</div>
-		   </div>
+                
+            First Name: <input type="text" name="fname" id="fname" size="35" <?php if (isset($_POST['fname'])) echo 'value="'.$_POST['fname'].'"';?>/><br>
+            Last Name: <input type="text" name="lname" id="lname" size="35" <?php if (isset($_POST['lname'])) echo 'value="'.$_POST['lname'].'"';?>/><br><br>
+            
+            Address: <br>
            
-		   <div class="row">
-				<div class="input-field col s6">
-					<label>State</label>
-					<br>
-					<select name="hstate" id="hstate" class="browser-default" <?php if (isset($_POST['hstate'])) echo 'value="'.$_POST['hstate'].'"';?>>
-						<option value="" disabled selected>Choose your option</option>
-						<option value="NSW">NSW</option>
-						<option value="ACT">ACT</option>
-						<option value="QLD">QLD</option>
-						<option value="VIC">VIC</option>
-						<option value="SA">SA</option>
-						<option value="WA">WA</option>
-						<option value="NT">NT</option>
-					</select>
-				</div>
-				<div class="input-field col s6">
-					
-	
-				</div>
-		   </div>
-		    <div class="input-field col s12">
-   
+           Number and Street Address: <input type="text" name="hname" id="hname" size="35" <?php if (isset($_POST['hname'])) echo 'value="'.$_POST['hname'].'"';?>/><br>
+            Surburb/City: <input type="text" name="hcity" id="hcity" size="35" <?php if (isset($_POST['hcity'])) echo 'value="'.$_POST['hcity'].'"';?>/><br>
+            State: <select name="hstate" id="hstate" <?php if (isset($_POST['hstate'])) echo 'value="'.$_POST['hstate'].'"';?>>
+           			<option value="NSW">NSW</option>
+  					<option value="ACT">ACT</option>
+  					<option value="QLD">QLD</option>
+                    <option value="VIC">VIC</option>
+  					<option value="SA">SA</option>
+                    <option value="WA">WA</option>
+  					<option value="NT">NT</option>
+					</select><br>
                     Postcode: <input type="text" name="hcode" id="hcode" size="4" <?php if (isset($_POST['hcode'])) echo 'value="'.$_POST['hcode'].'"';?>/><br><br>
            
-                           
+            
+            Student's Class: <select name="sClass" id="sClass" <?php if (isset($_POST['sClass'])) echo 'value="'.$_POST['sClass'].'"';?>>
+  						<option value="KA">KA</option>
+  						<option value="KB">KB</option>
+  						<option value="KC">KC</option>
+  						<option value="KD">KD</option>
+                        <option value="1A">1A</option>
+  						<option value="1B">1B</option>
+  						<option value="1C">1C</option>
+  						<option value="1D">1D</option>
+                        <option value="2A">2A</option>
+  						<option value="2B">2B</option>
+  						<option value="2C">2C</option>
+  						<option value="2D">2D</option>
+                        <option value="3A">3A</option>
+  						<option value="3B">3B</option>
+  						<option value="3C">3C</option>
+  						<option value="3D">3D</option>
+                        <option value="4A">4A</option>
+  						<option value="4B">4B</option>
+  						<option value="4C">4C</option>
+  						<option value="4D">4D</option>
+                        <option value="5A">5A</option>
+  						<option value="5B">5B</option>
+  						<option value="5C">5C</option>
+  						<option value="5D">5D</option>
+                        <option value="6A">6A</option>
+  						<option value="6B">6B</option>
+  						<option value="6C">6C</option>
+  						<option value="6D">6D</option>
+					</select>
+                
             Username: <input type='text' 
                 name='username' 
                 id='username' 
@@ -203,8 +178,6 @@ ini_set('display_errors', 'on');
             Confirm password: <input type="password" 
                                      name="confirmpwd" 
                                      id="confirmpwd" size="35"/><br><br>
-			</div>
-		</div>
             <input type="button" 
                    value="Register" 
                    onclick="return regformhash(this.form,
@@ -228,7 +201,7 @@ ini_set('display_errors', 'on');
                                    this.form.password,
                                    this.form.confirmpwd);" /> 
         </form>
-		</div>    
+        
      
         <script>
 		
@@ -280,17 +253,13 @@ ini_set('display_errors', 'on');
         		$( '.isa_error' ).effect( "shake", {times:1}, 500 );
     		} );
 		};
-		
+	
 		</script>
         </div>
-		</div>
         
         </div>
         <p>Return to the <a href="index.php">login page</a>.</p>
         <?php include 'includes/footer.php'; ?>
         </div>
-</div>	
-</div>
     </body>
-
 </html>

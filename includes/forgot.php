@@ -100,7 +100,7 @@
               form.submit();
               return true;
             }
-			</script>
+            </script>
 
 
         </head>

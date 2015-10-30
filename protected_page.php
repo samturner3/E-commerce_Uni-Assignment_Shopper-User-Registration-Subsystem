@@ -9,6 +9,7 @@ sec_session_start();
     <head>
         <meta charset="UTF-8">
         <title>Secure Login: Protected Page</title>
+        <link rel="shortcut icon" href="images/NewStarSchoolLogoIcon.ico" type="image/x-icon">
         <link href="styles/ssmcCSS.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
