@@ -45,7 +45,7 @@ if(login_check($db) == true) {
                         echo '<p>Currently logged ' . $logged . ' as ' . htmlentities($_SESSION['username']) . '.</p>';
 						echo '<p>Your name is: ' . htmlentities($_SESSION['fname']) . ' ' . htmlentities($_SESSION['lname']) . '.</p>';
 					
-						echo '<p>Your Address is: ' . htmlentities($_SESSION['hname']) . ', ' . htmlentities($_SESSION['hcity']) . ', ' . htmlentities($_SESSION['hstate']) . '. ' . htmlentities($_SESSION['hcode']) . '</p>';
+						echo '<p>Your Address is: ' . htmlentities($_SESSION['addr1']) . ', ' . htmlentities($_SESSION['addr2']) . ', ' . htmlentities($_SESSION['hcity']) . ', ' . htmlentities($_SESSION['hstate']) . '. ' . htmlentities($_SESSION['hcode']) . ', ' . htmlentities($_SESSION['hcountry']) . '</p>';
  //' . htmlentities($_SESSION['hnumber']) . '
             echo '<p>Do you want to change user? <a href="includes/logout.php">Log out</a>.</p>';
         } else {

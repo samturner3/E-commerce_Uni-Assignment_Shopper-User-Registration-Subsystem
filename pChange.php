@@ -23,15 +23,9 @@
 
             <script type="text/JavaScript">
             function checkPass(form){
-              if (form.nPass.value.length !== 8 || form.oPass.value.length !== 8){
-                alert("Passwords must be exactly 8 characters long.  Please try again.");
-                //errorBox("Passwords must be exactly 8 characters long.  Please try again.");
-                //form.password.focus();
-                return false;
-              }
-              var re = /(?=.*[0-9].*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8}/;
+              var re = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})/;
               if (!re.test(form.nPass.value) || !re.test(form.oPass.value)) {
-             	  alert("Passwords must contain at least two numbers, at least one lowercase and at least one uppercase letter, and be 8 characters long.  Please try again.");
+             	  alert("Passwords must contain must contains one digit from 0-9, one lowercase character, one uppercase character,one special symbols in the list \"@#$%\", length at least 6 characters and maximum of 20.  Please try again.");
                 return false;
               }
               if(form.nPass.value != form.conf.value){

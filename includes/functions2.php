@@ -2,6 +2,10 @@
 include_once 'db_connect_PDO.php';
 $siteroot = '/comp344Ass2_PDO';
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 function sec_session_start() {
     $session_name = 'sec_session_id';   // Set a custom session name
     $secure = false;
@@ -28,7 +32,7 @@ function sec_session_start() {
 
 function login($email, $password, $db) {
     // Using prepared statements means that SQL injection is not possible.
-    if ($stmt = $db->prepare("SELECT shopper.shopper_id, shopper.sh_email, shopper.sh_username, shaddr.sh_firstname, shaddr.sh_familyname, shopper.sh_type, shopper.sh_password, shaddr.sh_street1, shaddr.sh_street2, shaddr.sh_city, shaddr.sh_state, shaddr.sh_postcode
+    if ($stmt = $db->prepare("SELECT shopper.shopper_id, shopper.sh_email, shopper.sh_username, shaddr.sh_firstname, shaddr.sh_familyname, shopper.sh_type, shopper.sh_password, shaddr.sh_street1, shaddr.sh_street2, shaddr.sh_city, shaddr.sh_state, shaddr.sh_postcode, shaddr.sh_country
 									from shopper
 									INNER JOIN shaddr
 									ON shopper.shopper_id =  shaddr.shopper_id
@@ -75,10 +79,12 @@ function login($email, $password, $db) {
           					$_SESSION['fname'] = $data['sh_firstname'];
           					$_SESSION['lname'] = $data['sh_familyname'];
           					//$_SESSION['hnumber'] = $hnumber;
-          					$_SESSION['hname'] = $data['sh_street1'];
+          					$_SESSION['addr1'] = $data['sh_street1'];
+							$_SESSION['addr2'] = $data['sh_street2'];
           					$_SESSION['hcity'] = $data['sh_city'];
           					$_SESSION['hstate'] = $data['sh_state'];
           					$_SESSION['hcode'] = $data['sh_postcode'];
+							$_SESSION['hcountry'] = $data['sh_country'];
 
 
 					//$_SESSION['sClass'] = $sClass;
@@ -210,12 +216,9 @@ function change_password($shopper_id){
   $data = $stmt->fetch();
 
 //validate password format
-  $passreg = "/(?=.*[0-9].*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8}/";
-  if(!strlen($oPass)==8 || !strlen($nPass)==8 || !strlen($conf)==8){
-    exit("Passwords must be 8 characters long");
-  }
+  $passreg = "/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})/";
   if(!preg_match($passreg, $oPass) || !preg_match($passreg, $nPass) || !preg_match($passreg, $conf)){
-    exit("Passwords must contain at least two numbers, at least one lowercase and at least one uppercase letter, and be 8 characters long.  Please try again.");
+    exit("P/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})/");
   }
 
 //only change password if the user changes it to something different,
@@ -229,7 +232,7 @@ function change_password($shopper_id){
         $SQL = "UPDATE shopper SET sh_password=? WHERE shopper_id=?";
         $stmt = $db->prepare($SQL);
         $stmt->bindParam(1,$password);
-        $stmt->bindParam(2, $_SESSION[user_id]);
+        $stmt->bindParam(2, $_SESSION['user_id']);
         $stmt->execute();
         //update login string so user isn't logged out
         $_SESSION['login_string'] = hash('sha512', $password . $_SERVER['HTTP_USER_AGENT']);
