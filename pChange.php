@@ -2,7 +2,7 @@
   include_once 'includes/db_connect_PDO.php';
   include_once 'includes/functions2.php';
   sec_session_start();
-  print_r($_SESSION);
+ // print_r($_SESSION);
   $db = db_connect();
   if(login_check($db) == true) {
     $_SESSION['pchange'] = "change";

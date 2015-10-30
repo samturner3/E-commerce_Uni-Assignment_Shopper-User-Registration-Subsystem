@@ -28,9 +28,7 @@ if (login_check($db) == true) {
 
     <?php
 
-	echo '<pre>';
-	var_dump($_SESSION);
-	echo '</pre>';
+	
 
 	require 'includes/pagetop.php'; ?>
     <h1>Login</h1>
