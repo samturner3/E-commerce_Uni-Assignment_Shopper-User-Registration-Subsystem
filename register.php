@@ -69,12 +69,15 @@ ini_set('display_errors', 'on');
         <ul>
             <li>Usernames must contain only letters, numbers and underscores (no spaces), and be between 3 and 16 characters long.</li>
             <li>Emails must have a valid email format</li>
-            <li>Passwords must be exactly 8 characters long</li>
-            <li>Passwords must contain
+            
+            <li>Passwords must be at least 6 characters and maximum of 20.</li>
+            <li>Passwords must also contain:
                 <ul>
-                    <li>At least one uppercase letter (A..Z)</li>
-                    <li>At least one lowercase letter (a..z)</li>
-                    <li>At least two numbers (0..9)</li>
+                    <li>At least one one digit from 0-9</li>
+                    <li>At least one lowercase character</li>
+                    <li>At least two one uppercase character</li>
+                    <li>At least one special symbol: @,#,$,%</li>
+                    
                 </ul>
             </li>
             <li>Your password and confirmation must match exactly</li>
