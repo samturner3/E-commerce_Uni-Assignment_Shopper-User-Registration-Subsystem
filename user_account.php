@@ -21,22 +21,11 @@ if(login_check($db) == true) {
 <head>
 <meta charset="utf-8">
 <title>Address Book</title>
-
-	<!--Import Google Icon Font-->
-      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-
-      <!--Let browser know website is optimized for mobile-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="shortcut icon" href="images/NewStarSchoolLogoIcon.ico" type="image/x-icon">
+<link href="styles/ssmcCSS.css" rel="stylesheet" type="text/css">
 
 </head>
- <body>
-      <!--Import jQuery before materialize.js-->
-      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-      <script type="text/javascript" src="js/materialize.min.js"></script>
-    </body>
-	
+
 <body class="no_col_2">
 <div id="site">
 <?php require 'includes/pagetop.php'; ?>
@@ -48,12 +37,9 @@ if(login_check($db) == true) {
 //date_default_timezone_set('Australia/Sydney');
 //print_r($_SESSION);
 ?>
-<div class="container">
-		<div class="card-panel">
     <div id="content">
         <div id="col_1" role="main">
             <h1>Your Account</h1>
-			
            <?php
         if (login_check($db) == true) {
                         echo '<p>Currently logged ' . $logged . ' as ' . htmlentities($_SESSION['username']) . '.</p>';
@@ -62,17 +48,14 @@ if(login_check($db) == true) {
 						echo '<p>Your Address is: ' . htmlentities($_SESSION['hname']) . ', ' . htmlentities($_SESSION['hcity']) . ', ' . htmlentities($_SESSION['hstate']) . '. ' . htmlentities($_SESSION['hcode']) . '</p>';
  //' . htmlentities($_SESSION['hnumber']) . '
             echo '<p>Do you want to change user? <a href="includes/logout.php">Log out</a>.</p>';
-			echo '<p>Do you want to change your password? <a href="pchange.php">Change password</a>.</p>';
         } else {
                         echo '<p>Currently logged ' . $logged . '.</p>';
                         echo "<p>If you don't have a login, please <a href='register.php'>register</a></p>";
                 }
 ?>
-			
             </div>
 
-	</div>
-		</div>
+
 <?php include 'includes/footer.php'; ?>
 <?php //print_r($SpecialAltText);?>
 </div>

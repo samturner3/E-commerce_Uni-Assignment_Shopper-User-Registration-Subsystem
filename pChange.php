@@ -11,13 +11,9 @@
     <html>
         <head>
             <title>Change Password</title>
-            <!--Import Google Icon Font-->
-			<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-			<!--Import materialize.css-->
-			<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-
-			<!--Let browser know website is optimized for mobile-->
-			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+            <link rel="shortcut icon" href="images/NewStarSchoolLogoIcon.ico" type="image/x-icon">
+            <link href="styles/ssmcCSS.css" rel="stylesheet" type="text/css" />
+            <link href="styles/css/font-awesome.css" rel="stylesheet" type="text/css" />
             <script type="text/JavaScript" src="js/sha512.js"></script>
             <script type="text/JavaScript" src="js/forms.js"></script>
             <script src="sliderengine/jquery.js"></script>
@@ -49,54 +45,27 @@
 
 
         </head>
-		<body>
-		  <!--Import jQuery before materialize.js-->
-		  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-		  <script type="text/javascript" src="js/materialize.min.js"></script>
-		 </body>
-
-        <body>
-		  <div class="container">
-		  <div class="card-panel">
+        <body class="no_col_2">
             <div id="site">
               <?php require 'includes/pagetop.php'; ?>
-			  <h3>Change Password</h3>
               <div id="logonBox">
                 <form action="includes/change_password.php" method="post" name="password_form">
-				  <div class="row">
-					  <div class="input-field col s12">
-						 <input type="password" name="oPass" id = "oPass" size="35" class="validate"/>
-						<label for="oPass">Old Password</label>
-				  </div>
-				
-				  
-					  <div class="input-field col s12">
-						 <input type="password" name="nPass" id="nPass" size="35" class="validate"/>
-						<label for="nPass">New Password</label>
-				  </div>
-				  <div class="input-field col s12">
-						 <input type="password" name = "conf" id="conf" size="35" class="validate"/>
-						<label for="conf">Confirm Password</label>
-						
-				  </div>
-				  <input type="hidden" name="pType" value="change"/>
-				  </div>
-				</div>
-                   
-          
+                    Old Password: <input type="password" name="oPass" id = "oPass" size="35" />
+                    <br>
+                    New Password: <input type="password" name="nPass" id="nPass" size="35"/>
+                    <br>
+                    Confirm Password: <input type="password" name = "conf" id="conf" size="35"/>
+                    <input type="hidden" name="pType" value="change"/>
+                    <br><br>
+
+                    <input type="button"
+                           value="Change Password"
+                           onclick="checkPass(this.form);" />
                 </form>
-				
-				<button class="btn waves-effect waves-light" type="button" name="Change Password"  value="Change Password" onclick="checkPass(this.form);">Change Password
-					<i class="material-icons right">send</i>
-				</button>
- 		<br>
               </div>
               <?php include 'includes/footer.php'; ?>
             </div>
-		  </div>
-		  </div>	
           </body>
-		
         </html>
     <?php
   }
