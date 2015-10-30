@@ -17,14 +17,32 @@ if (login_check($db) == true) {
 <html>
     <head>
         <title>Secure Login: Log In</title>
-        <link rel="shortcut icon" href="images/NewStarSchoolLogoIcon.ico" type="image/x-icon">
-        <link href="styles/ssmcCSS.css" rel="stylesheet" type="text/css" />
-        <link href="styles/css/font-awesome.css" rel="stylesheet" type="text/css" />
+        <!--Import Google Icon Font-->
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!--Import materialize.css-->
+		<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+		<!--Let browser know website is optimized for mobile-->
+		  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+   
+      
+
         <script type="text/JavaScript" src="js/sha512.js"></script>
         <script type="text/JavaScript" src="js/forms.js"></script>
+		
     </head>
-    <body class="no_col_2">
-<div id="site">
+	
+	 <body>
+      <!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+    </body>
+	 
+<body class="no_col_2">
+ <div class="container">
+		<div class="card-panel">
+        <!-- Page Content goes here -->
+	<div id="site">
 
     <?php
 
@@ -33,7 +51,8 @@ if (login_check($db) == true) {
 	echo '</pre>';
 
 	require 'includes/pagetop.php'; ?>
-    <h1>Login</h1>
+
+    <h3>Login</h3>
     <?php
     //Success Message
 		if(isset($_COOKIE['success'])) {
@@ -61,18 +80,24 @@ if (login_check($db) == true) {
         }
 		if (login_check($db) == false) {
         ?>
+		
         <form action="includes/process_login.php" method="post" name="login_form">
-            Email: <input type="text" name="email" size="35" />
-            <br>
-            Password: <input type="password"
-                             name="password"
-                             id="password"
-                             size="35"/> <br> <br>
+		<div class="row">
+			 <div class="input-field col s12">
+				<input id="email" name ="email" type="email" class="validate">
+				<label for="email">Email</label>
+			</div>
+		</div>
+		<div class="row">
+			 <div class="input-field col s12">
+				<input id="password" name ="password" type="password" class="validate"  size="35">
+				<label for="password">Password</label>
+			</div>
+		</div>
 
-            <input type="button"
-                   value="Login"
-                   onclick="formhash(this.form, this.form.password);" />
-        </form>
+			<button class="btn waves-effect waves-light" type="button" name="login"  value="Login" onclick="formhash(this.form, this.form.password);">Submit
+			<i class="material-icons right">send</i>
+			</button>
  		<br>
 <?php }
         if (login_check($db) == true) {
@@ -87,11 +112,12 @@ if (login_check($db) == true) {
 ?>
 </div>
 </div>
+</div>
 <?php include 'includes/footer.php'; ?>
 
 </div>
 
 </div>
-
-    </body>
+</div>
+</body>
 </html>
