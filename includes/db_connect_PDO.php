@@ -16,7 +16,7 @@ if ($dbloc == "mq") {
 }
 else if ($dbloc == "local") {
 	$dbhost = 'localhost';
-	$dbusername = 'user2';
+	$dbusername = 'root';
 	$dbuserpassword = '';
 	$default_dbname = 'user_registration';
 }

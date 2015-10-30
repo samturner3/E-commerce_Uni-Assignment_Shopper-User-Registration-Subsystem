@@ -216,12 +216,9 @@ function change_password($shopper_id){
   $data = $stmt->fetch();
 
 //validate password format
-  $passreg = "/(?=.*[0-9].*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8}/";
-  if(!strlen($oPass)==8 || !strlen($nPass)==8 || !strlen($conf)==8){
-    exit("Passwords must be 8 characters long");
-  }
+  $passreg = "/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})/";
   if(!preg_match($passreg, $oPass) || !preg_match($passreg, $nPass) || !preg_match($passreg, $conf)){
-    exit("Passwords must contain at least two numbers, at least one lowercase and at least one uppercase letter, and be 8 characters long.  Please try again.");
+    exit("P/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})/");
   }
 
 //only change password if the user changes it to something different,
@@ -235,7 +232,7 @@ function change_password($shopper_id){
         $SQL = "UPDATE shopper SET sh_password=? WHERE shopper_id=?";
         $stmt = $db->prepare($SQL);
         $stmt->bindParam(1,$password);
-        $stmt->bindParam(2, $_SESSION[user_id]);
+        $stmt->bindParam(2, $_SESSION['user_id']);
         $stmt->execute();
         //update login string so user isn't logged out
         $_SESSION['login_string'] = hash('sha512', $password . $_SERVER['HTTP_USER_AGENT']);
