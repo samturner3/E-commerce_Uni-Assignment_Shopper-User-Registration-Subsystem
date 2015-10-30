@@ -171,30 +171,30 @@ function login_check($db) {
                     return true;
                 } else {
                     // Not logged in
-					echo ('Fail1');
+				/*	echo ('Fail1');
 					echo ('<br> LoginCheck   : ' . $login_check . '<br>');
 					echo ('<br> $login_string: ' . $login_string . '<br>');
 					echo ('<br> $password  2  : ' . $data['sh_password'] . '<br>');
 					echo ('<br> $user_browser:' . $user_browser . '<br><br>');
 
 					echo ('<br> Username  : ' . $username . '<br>');
-					echo ('<br> First Name:' . $fname . '<br><br>');
+					echo ('<br> First Name:' . $fname . '<br><br>');*/
 
                     return false;
                 }
             } else {
                 // Not logged in
-				echo ('Fail2');
+				//echo ('Fail2');
                 return false;
             }
         } else {
             // Not logged in
-			echo ('Fail3');
+			//echo ('Fail3');
             return false;
         }
     } else {
         // Not logged in
-		echo ('Fail4');
+		//echo ('Fail4');
         return false;
     }
 }

@@ -14,11 +14,11 @@ $warning_msg = "";
 $error_array = array();
 $error_MissingValues_array = array();
 $form_values_array = array();
-echo 'here';
+//echo 'here';
 	//exit;
 if (isset($_POST['fname'], $_POST['lname'], $_POST['addr1'], $_POST['addr2'], $_POST['hcity'], $_POST['hstate'], $_POST['hcountry'], $_POST['hcode'], $_POST['username'], $_POST['email'], $_POST['ccard'], $_POST['ccexpmonth'], $_POST['ccexpyear'], $_POST['password']  )) {
 	echo $_POST['fname'];
-	echo 'allset!';
+	//echo 'allset!';
 	//exit;
     // Sanitize and validate the data passed in and set them.
 	$fname = filter_input(INPUT_POST, 'fname', FILTER_SANITIZE_STRING);
@@ -37,7 +37,7 @@ if (isset($_POST['fname'], $_POST['lname'], $_POST['addr1'], $_POST['addr2'], $_
 	$ccexpmonth = filter_input(INPUT_POST, 'ccexpmonth', FILTER_SANITIZE_STRING);
 	$ccexpyear = filter_input(INPUT_POST, 'ccexpyear', FILTER_SANITIZE_STRING);
 	$p = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
-	echo $p;
+	//echo $p;
 	// Add all elements to array
 
 	$form_values_array['First Name'] = $fname;
@@ -250,13 +250,13 @@ $ownEntry = "1";
     }
 	else {
 		$warning_msg = 'There were error messages, so new user was not added.';
-		echo 'here2';
+		//echo 'here2';
 		//exit;
 	};
 	
 }
 else {
-		echo 'not all set <br>';
-		print_r($_POST);
+		//echo 'not all set <br>';
+		//print_r($_POST);
 		
 	};
