@@ -2,6 +2,10 @@
 include_once 'db_connect_PDO.php';
 $siteroot = '/comp344Ass2_PDO';
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 function sec_session_start() {
     $session_name = 'sec_session_id';   // Set a custom session name
     $secure = false;
@@ -75,7 +79,8 @@ function login($email, $password, $db) {
           					$_SESSION['fname'] = $data['sh_firstname'];
           					$_SESSION['lname'] = $data['sh_familyname'];
           					//$_SESSION['hnumber'] = $hnumber;
-          					$_SESSION['hname'] = $data['sh_street1'];
+          					$_SESSION['addr1'] = $data['sh_street1'];
+							$_SESSION['addr2'] = $data['sh_street2'];
           					$_SESSION['hcity'] = $data['sh_city'];
           					$_SESSION['hstate'] = $data['sh_state'];
           					$_SESSION['hcode'] = $data['sh_postcode'];

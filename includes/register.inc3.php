@@ -2,6 +2,11 @@
 include_once 'db_connect_PDO.php';
 //include_once 'psl-config.php';
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+
 $db = db_connect();
 
 $error_msg = "";
@@ -9,16 +14,23 @@ $warning_msg = "";
 $error_array = array();
 $error_MissingValues_array = array();
 $form_values_array = array();
-
-if (isset($_POST['fname'], $_POST['lname'], $_POST['hname'], $_POST['hcity'], $_POST['hstate'], $_POST['hcode'], $_POST['sClass'], $_POST['username'], $_POST['email'], $_POST['ccard'], $_POST['ccexpmonth'], $_POST['ccexpyear'], $_POST['password']  )) {
-	//echo $_POST['p'];
+echo 'here';
+	//exit;
+if (isset($_POST['fname'], $_POST['lname'], $_POST['addr1'], $_POST['addr2'], $_POST['hcity'], $_POST['hstate'], $_POST['hcountry'], $_POST['hcode'], $_POST['username'], $_POST['email'], $_POST['ccard'], $_POST['ccexpmonth'], $_POST['ccexpyear'], $_POST['password']  )) {
+	echo $_POST['fname'];
+	echo 'allset!';
+	//exit;
     // Sanitize and validate the data passed in and set them.
 	$fname = filter_input(INPUT_POST, 'fname', FILTER_SANITIZE_STRING);
 	$lname = filter_input(INPUT_POST, 'lname', FILTER_SANITIZE_STRING);
-	$hname = filter_input(INPUT_POST, 'hname', FILTER_SANITIZE_STRING);
+	
+	$addr1 = filter_input(INPUT_POST, 'addr1', FILTER_SANITIZE_STRING);
+	$addr2 = filter_input(INPUT_POST, 'addr2', FILTER_SANITIZE_STRING);
 	$hcity = filter_input(INPUT_POST, 'hcity', FILTER_SANITIZE_STRING);
 	$hstate = filter_input(INPUT_POST, 'hstate', FILTER_SANITIZE_STRING);
-	$sClass = filter_input(INPUT_POST, 'sClass', FILTER_SANITIZE_STRING);
+	$hcountry = filter_input(INPUT_POST, 'hcountry', FILTER_SANITIZE_STRING);
+	$hcode = filter_input(INPUT_POST, 'hcode', FILTER_SANITIZE_STRING);
+	
 	$username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
 	$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
 	$ccard = filter_input(INPUT_POST, 'ccard', FILTER_SANITIZE_STRING);
@@ -30,10 +42,13 @@ if (isset($_POST['fname'], $_POST['lname'], $_POST['hname'], $_POST['hcity'], $_
 
 	$form_values_array['First Name'] = $fname;
 	$form_values_array['Last Name'] = $lname;
-	$form_values_array['Address'] = $hname;
-	$form_values_array['Suburb / City'] = $hname;
+	$form_values_array['Address Line 1'] = $addr1;
+	$form_values_array['Address Line 2'] = $addr2;
+	$form_values_array['Suburb / City'] = $hcity;
 	$form_values_array['State'] = $hstate;
-	$form_values_array['Student/s Class'] = $sClass;
+	$form_values_array['Counrty'] = $hcountry;
+	$form_values_array['Post Code'] = $hcode;
+	
 	$form_values_array['Username'] = $username;
 	$form_values_array['Email'] = $email;
 	$form_values_array['Credit Card'] = $ccard;
@@ -72,11 +87,6 @@ if (isset($_POST['fname'], $_POST['lname'], $_POST['hname'], $_POST['hcity'], $_
        // $error_msg .= 'Invalid password configuration. (ServerSide check error)';
     }
 
-	$hcode = filter_input(INPUT_POST, 'hcode', FILTER_SANITIZE_NUMBER_FLOAT);
-	if (!ctype_digit($hcode) Or strlen($hcode)!=4) {
-		//If the post code is not digits or is 4 in length.
-		//$error_msg .= '<div class="isa_error"><i class="fa fa-times-circle"></i>Post Code must be numbers and 4 digits only.(ServerSide check error)</div>';
-	}
 
 
 
@@ -166,21 +176,23 @@ if (isset($_POST['fname'], $_POST['lname'], $_POST['hname'], $_POST['hcity'], $_
       $data = $stmt->fetch();*/
 
 
-
+$ownEntry = "1";
 
 			 // Insert the new user into the database SHADDR
-        if ($insert_stmt = $db->prepare("INSERT INTO shaddr (sh_firstname, sh_familyname, sh_street1, sh_city, sh_state, sh_postcode, shopper_id, own_entry)
-  											VALUES(?, ?, ?, ?, ?, ?, ?, ?);"
+        if ($insert_stmt = $db->prepare("INSERT INTO shaddr (sh_firstname, sh_familyname, sh_street1, sh_street2, sh_city, sh_state, sh_postcode, sh_country, shopper_id, own_entry)
+  											VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
 											)){
             //$insert_stmt->bind_param('ssssssssss', $email, $username, $fname, $lname, $sClass, $email, $hname, $hcity, $hstate, $hcode);
       $insert_stmt->bindParam(1, $fname);
       $insert_stmt->bindParam(2, $lname);
-      $insert_stmt->bindParam(3, $hname);
-      $insert_stmt->bindParam(4, $hcity);
-      $insert_stmt->bindParam(5, $hstate);
-      $insert_stmt->bindParam(6, $hcode);
-      $insert_stmt->bindParam(7, $shopper_id);
-	  $insert_stmt->bindParam(8, 1);
+      $insert_stmt->bindParam(3, $addr1);
+	  $insert_stmt->bindParam(4, $addr2);
+      $insert_stmt->bindParam(5, $hcity);
+      $insert_stmt->bindParam(6, $hstate);
+      $insert_stmt->bindParam(7, $hcode);
+	  $insert_stmt->bindParam(8, $hcountry);
+      $insert_stmt->bindParam(9, $shopper_id);
+	  $insert_stmt->bindParam(10, $ownEntry);
 
             // Execute the prepared query.
             if (! $insert_stmt->execute()) {
@@ -218,9 +230,9 @@ if (isset($_POST['fname'], $_POST['lname'], $_POST['hname'], $_POST['hcity'], $_
 
 
 		// the message
-		$msg = "Hi " + $fname + ",\n You have registered successfully.\n\n Class: " + $sClass + "\nUsername: " + $username + "\n\nYou may now log in.";
+		$msg = "Hi " + $fname + ",\n You have registered successfully. \nUsername: " + $username + "\n\nYou may now log in.";
 
-		//The email includes the student's name, class, username and some information for confirming registration. The sender's email address should be your MQ email address (you are the shop owner).
+		/*//The email includes the student's name, class, username and some information for confirming registration. The sender's email address should be your MQ email address (you are the shop owner).
 
 		$mailheaders = 'From: sam.turner@students.mq.edu.au' . "\r\n" .
 			'Reply-To: sam.turner@students.mq.edu.au' . "\r\n" .
@@ -232,12 +244,19 @@ if (isset($_POST['fname'], $_POST['lname'], $_POST['hname'], $_POST['hcity'], $_
 		$msg = wordwrap($msg,70);
 
 		mail($email,$mailsubject,$msg,$mailheaders);
-
+*/
         setcookie(success);
 		header('Location: ./index.php');
     }
 	else {
 		$warning_msg = 'There were error messages, so new user was not added.';
-
+		echo 'here2';
+		//exit;
 	};
+	
 }
+else {
+		echo 'not all set <br>';
+		print_r($_POST);
+		exit;
+	};

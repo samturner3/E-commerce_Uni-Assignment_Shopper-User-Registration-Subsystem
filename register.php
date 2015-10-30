@@ -94,50 +94,14 @@ ini_set('display_errors', 'on');
             
             Address: <br>
            
-           Number and Street Address: <input type="text" name="hname" id="hname" size="35" <?php if (isset($_POST['hname'])) echo 'value="'.$_POST['hname'].'"';?>/><br>
+           Address line 1: <input type="text" name="addr1" id="addr1" size="35" <?php if (isset($_POST['addr1'])) echo 'value="'.$_POST['addr1'].'"';?>/><br>
+           Address line 2: <input type="text" name="addr2" id="addr2" size="35" <?php if (isset($_POST['addr2'])) echo 'value="'.$_POST['addr2'].'"';?>/><br>
             Surburb/City: <input type="text" name="hcity" id="hcity" size="35" <?php if (isset($_POST['hcity'])) echo 'value="'.$_POST['hcity'].'"';?>/><br>
-            State: <select name="hstate" id="hstate" <?php if (isset($_POST['hstate'])) echo 'value="'.$_POST['hstate'].'"';?>>
-           			<option value="NSW">NSW</option>
-  					<option value="ACT">ACT</option>
-  					<option value="QLD">QLD</option>
-                    <option value="VIC">VIC</option>
-  					<option value="SA">SA</option>
-                    <option value="WA">WA</option>
-  					<option value="NT">NT</option>
-					</select><br>
-                    Postcode: <input type="text" name="hcode" id="hcode" size="4" <?php if (isset($_POST['hcode'])) echo 'value="'.$_POST['hcode'].'"';?>/><br><br>
+            State: <input type="text" name="hstate" id="hstate" size="35" <?php if (isset($_POST['hstate'])) echo 'value="'.$_POST['hstate'].'"';?>/><br>
+            Country: <input type="text" name="hcountry" id="hcountry" size="35" <?php if (isset($_POST['hcountry'])) echo 'value="'.$_POST['hcountry'].'"';?>/><br>
+                    Postcode: <input type="text" name="hcode" id="hcode" size="35" <?php if (isset($_POST['hcode'])) echo 'value="'.$_POST['hcode'].'"';?>/><br><br>
            
             
-            Student's Class: <select name="sClass" id="sClass" <?php if (isset($_POST['sClass'])) echo 'value="'.$_POST['sClass'].'"';?>>
-  						<option value="KA">KA</option>
-  						<option value="KB">KB</option>
-  						<option value="KC">KC</option>
-  						<option value="KD">KD</option>
-                        <option value="1A">1A</option>
-  						<option value="1B">1B</option>
-  						<option value="1C">1C</option>
-  						<option value="1D">1D</option>
-                        <option value="2A">2A</option>
-  						<option value="2B">2B</option>
-  						<option value="2C">2C</option>
-  						<option value="2D">2D</option>
-                        <option value="3A">3A</option>
-  						<option value="3B">3B</option>
-  						<option value="3C">3C</option>
-  						<option value="3D">3D</option>
-                        <option value="4A">4A</option>
-  						<option value="4B">4B</option>
-  						<option value="4C">4C</option>
-  						<option value="4D">4D</option>
-                        <option value="5A">5A</option>
-  						<option value="5B">5B</option>
-  						<option value="5C">5C</option>
-  						<option value="5D">5D</option>
-                        <option value="6A">6A</option>
-  						<option value="6B">6B</option>
-  						<option value="6C">6C</option>
-  						<option value="6D">6D</option>
-					</select>
                 
             Username: <input type='text' 
                 name='username' 
@@ -184,12 +148,14 @@ ini_set('display_errors', 'on');
                    				   this.form.fname,
                                    this.form.lname,
                                    
-                                   this.form.hname,
+                                   this.form.addr1,
+                                   this.form.addr2,
                                    this.form.hcity,
                                    this.form.hstate,
+                                   this.form.hcountry,
                                    this.form.hcode,
                                    
-                                   this.form.sClass,
+                                   
                                    
                                    this.form.username,
                                    this.form.email,
@@ -221,9 +187,10 @@ ini_set('display_errors', 'on');
 			fname: {required: true, lettersonly: true},
 			lname: {required: true, lettersonly: true},
 			
-			hname: {required: true},
+			addr1: {required: true},
+			addr2: {required: false},
 			hcity: {required: true, lettersonly: true},
-			hcode: {required: true, number: true, maxlength: 4, minlength: 4},
+			hcode: {required: true, maxlength: 8, minlength: 3},
 			ccard: {required: true, number: true, maxlength: 10, minlength: 10},
    			email: {required: true, email: true },
 			username: {required: true},
@@ -234,10 +201,11 @@ ini_set('display_errors', 'on');
 			messages: {
 			fname: {required: "Missing First Name", lettersonly: "Name can only contain letters"},
 			lname: {required: "Missing Last Name", lettersonly: "Name can only contain letters"},
-			hnumber: {required: "Missing House / Unit Number"},
-			hname: {required: "Missing Street Name", lettersonly: "May only contain letters"},
+			
+			addr1: {required: "Missing Address Line 1"},
+			
 			hcity: {required: "Missing City / Suburb Name", lettersonly: "May only contain letters"},
-			hcode: {required: "Missing Postcode", number: "May only contain numbers", maxlength: "Must be 4 digits", minlength: "Must be 4 digits"},
+			hcode: {required: "Missing Postcode", maxlength: "Must under 9 characters", minlength: "Must be at least 3 characters"},
 			ccard: {required: "Missing credit card number", number: "May only contain numbers", maxlength: "Must be 10 digits in length", minlength: "Must be 10 digits in length"},
    			email: {required: "Missing Email", email: "Incorrect email format" },
 			username: {required: "Missing Username"},
@@ -248,11 +216,7 @@ ini_set('display_errors', 'on');
 			});
 	});
 	
-		function scrollAndShake() {
-			$("html, body").animate({scrollTop:$('#error').offset().top}, 800 , function() {
-        		$( '.isa_error' ).effect( "shake", {times:1}, 500 );
-    		} );
-		};
+		
 	
 		</script>
         </div>

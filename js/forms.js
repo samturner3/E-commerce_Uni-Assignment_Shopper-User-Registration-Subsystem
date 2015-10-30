@@ -23,6 +23,12 @@ function storeValues(myform)
   return true;
 }
 
+function scrollAndShake() {
+			$("html, body").animate({scrollTop:$('#error').offset().top}, 800 , function() {
+        		$( '.isa_error' ).effect( "shake", {times:1}, 500 );
+    		} );
+		}
+
 function formhash(form, password) {
     // Create a new element input, this will be our hashed password field.
     /*var p = document.createElement("input");
@@ -52,7 +58,7 @@ function errorBoxMissing() {
 			console.log(error_MissingValues_array[i] + " Is missing>");
 			$(".isa_error").append(error_MissingValues_array[i] + "<br>");
 			}
-			$("#error").append("</div>")
+			$("#error").append("</div>");
 			scrollAndShake();
 			return false;
 			error_MissingValues_array = [];
@@ -78,7 +84,7 @@ function errorBox(message) {
 
 			//<div class=\"isa_warning\">
 
-function regformhash(form, fname, lname, hname, hcity, hstate, hcode, sClass, uid, email, ccard, ccexpmonth, ccexpyear, password, conf) {
+function regformhash(form, fname, lname, addr1, addr2, hcity, hstate, hcountry, hcode, uid, email, ccard, ccexpmonth, ccexpyear, password, conf) {
      // Check each field has a value
 
 var form_values_array = [];
@@ -89,11 +95,11 @@ noerrors = true;
 
 form_values_array.push(["First Name", fname.value]);
 form_values_array.push(["Last Name", lname.value]);
-form_values_array.push(["Address", hname.value]);
+form_values_array.push(["Address Line 1", addr1.value]);
 form_values_array.push(["City/Suburb", hcity.value]);
 form_values_array.push(["State", hstate.value]);
+form_values_array.push(["Country", hcountry.value]);
 form_values_array.push(["Post Code", hcode.value]);
-form_values_array.push(["Student\'s Class", sClass.value]);
 form_values_array.push(["Username", uid.value]);
 form_values_array.push(["Email", email.value]);
 form_values_array.push(["Credit Card", ccard.value]);
@@ -105,11 +111,11 @@ form_values_array.push(["Confirm Password", conf.value]);
 
 for (var i = 0; i < form_values_array.length; i++) {
 	console.log(form_values_array[i][0] + form_values_array[0][i]);
-	if (form_values_array[i][1] == ''){
+	if (form_values_array[i][1] === ''){
 		//console.log(form_values_array[i][0] + " is empty!");
 		error_MissingValues_array.push(form_values_array[i][0]);
 		//errorBox("Please ensure you have filled out all fields: " + form_values_array[i][0] + " is empty!");
-	};
+	}
 
 
 }
@@ -120,7 +126,7 @@ if (error_MissingValues_array.length > 0) {
 }
 else {
 	NoMissingValues = true;
-};
+}
 
 /*form_values_array.forEach(function(entry) {
     console.log(entry);
@@ -172,13 +178,14 @@ else {
 	// Check the hname (Address)
 
     re = /^[a-zA-Z0-9" "\/]+$/;
-    if(!re.test(form.hname.value)) {
-		errorBox("Address name must contain only letters or numbers. Please ensure you have no spaces and try again.");
+    if(!re.test(form.addr1.value)) {
+		errorBox("Address Line 1 must contain only letters or numbers.");
         form.hname.focus();
         return false;
     }
 	}
-
+	
+	
 	if (noerrors) {
 	// Check the hcity
 
@@ -200,12 +207,21 @@ else {
         return false;
     }
     }
+	
+	 if (noerrors) {
+    re = /^[a-zA-Z" "]+$/;
+    if(!re.test(form.hcountry.value)) {
+		errorBox("Country name must contain only letters.");
+        form.hcountry.focus();
+        return false;
+    }
+    }
 
 		// Check the hcode
  if (noerrors) {
-    re = /^([0-9]){4}$/;
+    re = /^[" "a-zA-Z0-9_-]{3,16}$/;
     if(!re.test(form.hcode.value)) {
-		errorBox("Post code must contain only numbers, and be 4 digits long. Please ensure you have no spaces and try again.");
+		errorBox("Post code must contain only numbers and/or letters, and be between 3 and 6 digits long.");
         form.hcode.focus();
         return false;
     }
@@ -243,28 +259,19 @@ else {
     }
  }
 
- if (noerrors) {
-    // Check that the password is sufficiently long (min 8 chars)
-    // The check is duplicated below, but this is included to give more
-    // specific guidance to the user
-    if (password.value.length !== 8) {
-		errorBox("Passwords must be exactly 8 characters long.  Please try again.");
-        form.password.focus();
-        return false;
-    }
- }
+
 
     // At least 2 number, one lowercase and one uppercase letter
     // At least 8 characters
 
  if (noerrors) {
 
-    var re = /(?=.*[0-9].*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8}/;
+    var re = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})/;
     if (!re.test(password.value)) {
-		errorBox("Passwords must contain at least two numbers, at least one lowercase and at least one uppercase letter, and be 8 characters long.  Please try again.");
+		errorBox("Passwords must contain must contains one digit from 0-9, one lowercase character, one uppercase character,one special symbols in the list \"@#$%\", length at least 6 characters and maximum of 20.  Please try again.");
         return false;
     }
- }
+ } //12aA123Asdee$
 
  if (noerrors) {
     // Check password and confirmation are the same
