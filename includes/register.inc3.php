@@ -238,7 +238,7 @@ $ownEntry = "1";
 			'Reply-To: sam.turner@students.mq.edu.au' . "\r\n" .
 			'X-Mailer: PHP/' . phpversion();
 
-		$mailsubject = 'New Star Public School Online Registration';
+		$mailsubject = 'Your Company Here Online Registration';
 
 		// use wordwrap() if lines are longer than 70 characters
 		$msg = wordwrap($msg,70);
@@ -258,5 +258,5 @@ $ownEntry = "1";
 else {
 		echo 'not all set <br>';
 		print_r($_POST);
-		exit;
+		
 	};

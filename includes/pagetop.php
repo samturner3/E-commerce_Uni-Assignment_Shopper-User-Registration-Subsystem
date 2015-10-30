@@ -16,8 +16,8 @@ if (login_check($db) == true) {
 ?>
 
 <div id="header" role="banner">
-<p>COMP344 Assignment 1, 2015. Sam Turner. 43156711</p>
-        <h1 id="logo"><a href="<?php echo $siteroot; ?>/index.php"><img src="<?php echo $siteroot; ?>/images/New_StarLogo190px.jpg" alt="New Star Public School" width="220"></a></h1>
+<p>COMP344 Assignment 2, 2015. Group: Shopper/User Registration Subsystem.</p>
+        <h1 id="logo"><a href="<?php echo $siteroot; ?>/index.php"><img src="images/your-logo-here.png" alt="Logo Here" width="214"></a></h1>
 
       <div class="inner" style="height:auto">
         <ul id="quick_links" class="reset menu">
@@ -41,7 +41,7 @@ if (login_check($db) == true) {
                 </li>
             </ul>
         <div id="banner">
-        <span class="inner"><img src="<?php echo $siteroot; ?>/images/childrenBanner.jpg" width="632" height="240" alt="childrenBanner" /></span>
+        <span class="inner"><img src="images/web_developer_banner.png" width="632" height="198" alt="childrenBanner" /></span>
         </div>
 
         <div id="nav_main" role="navigation" class="reset menu pull_out">

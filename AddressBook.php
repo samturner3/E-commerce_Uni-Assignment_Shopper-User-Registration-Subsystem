@@ -27,7 +27,7 @@ if(login_check($db) == true) {
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>New Star Public School - User Account</title>
+<title>Your Company Here Public School - User Account</title>
 <link rel="shortcut icon" href="images/NewStarSchoolLogoIcon.ico" type="image/x-icon">
 <link href="styles/ssmcCSS.css" rel="stylesheet" type="text/css">
 

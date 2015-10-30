@@ -32,7 +32,7 @@ function sec_session_start() {
 
 function login($email, $password, $db) {
     // Using prepared statements means that SQL injection is not possible.
-    if ($stmt = $db->prepare("SELECT shopper.shopper_id, shopper.sh_email, shopper.sh_username, shaddr.sh_firstname, shaddr.sh_familyname, shopper.sh_type, shopper.sh_password, shaddr.sh_street1, shaddr.sh_street2, shaddr.sh_city, shaddr.sh_state, shaddr.sh_postcode
+    if ($stmt = $db->prepare("SELECT shopper.shopper_id, shopper.sh_email, shopper.sh_username, shaddr.sh_firstname, shaddr.sh_familyname, shopper.sh_type, shopper.sh_password, shaddr.sh_street1, shaddr.sh_street2, shaddr.sh_city, shaddr.sh_state, shaddr.sh_postcode, shaddr.sh_country
 									from shopper
 									INNER JOIN shaddr
 									ON shopper.shopper_id =  shaddr.shopper_id
@@ -84,6 +84,7 @@ function login($email, $password, $db) {
           					$_SESSION['hcity'] = $data['sh_city'];
           					$_SESSION['hstate'] = $data['sh_state'];
           					$_SESSION['hcode'] = $data['sh_postcode'];
+							$_SESSION['hcountry'] = $data['sh_country'];
 
 
 					//$_SESSION['sClass'] = $sClass;

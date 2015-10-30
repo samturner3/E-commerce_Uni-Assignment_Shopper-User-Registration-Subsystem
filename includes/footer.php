@@ -45,8 +45,8 @@ if ($thisYear > $startYear) {
                 <li><a href="#">Nav10</a></li>
           </ul>
 
-          <img src="<?php echo $siteroot; ?>/images/NewStarSchoolLogoOnly.png" alt="New Star Public Schhol" width="157"> </div>
-        <p id="copyright" class="reset pull_out padding" role="contentinfo">© <?php echo $copyright ?> New Star Public School</a></p>
+          <img src="images/your-logo-here.png" alt="Your Logo" width="214"> </div>
+        <p id="copyright" class="reset pull_out padding" role="contentinfo">© <?php echo $copyright ?> Your Company Here</a></p>
 
-<p id="disclaimer"><p>New Star Public Schhol is a fictitious project created by Sam Turner solely for the purpose of a Macquarie University assignment. All products and people associated with New Star Public Schhol are also fictitious. Any resemblance to real institutions, products, or people is purely coincidental. Information provided about the product is also fictitious and should not be construed to be representative of actual products on the market in a similar product category.</p>
+<p id="disclaimer"><p>Your Company Here is a fictitious project created by Sam Turner solely for the purpose of a Macquarie University assignment. All products and people associated with Your Company Here are also fictitious. Any resemblance to real institutions, products, or people is purely coincidental. Information provided about the product is also fictitious and should not be construed to be representative of actual products on the market in a similar product category.</p>
     </div>

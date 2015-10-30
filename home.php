@@ -13,7 +13,7 @@ if(login_check($db) == true) {
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>New Star Public School - Home</title>
+<title>Your Company Here - Home</title>
 <link rel="shortcut icon" href="images/NewStarSchoolLogoIcon.ico" type="image/x-icon">
 <link href="styles/ssmcCSS.css" rel="stylesheet" type="text/css">
  <!-- Insert to your webpage before the </head> -->
