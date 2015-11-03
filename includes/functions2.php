@@ -260,12 +260,9 @@ function forgot_password(){
     $user_id = filter_input(INPUT_POST, 'user_id', FILTER_SANITIZE_STRING);
 
 //validate password format
-    $passreg = "/(?=.*[0-9].*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8}/";
-    if(!strlen($nPass)==8 || !strlen($conf)==8){
-      exit("Passwords must be 8 characters long");
-    }
+    $passreg = "/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})/";
     if(!preg_match($passreg, $nPass) || !preg_match($passreg, $conf)){
-      exit("Passwords must contain at least two numbers, at least one lowercase and at least one uppercase letter, and be 8 characters long.  Please try again.");
+      exit("Passwords must contain must contains one digit from 0-9, one lowercase character, one uppercase character,one special symbols in the list \"@#$%\", length at least 6 characters and maximum of 20.  Please try again.");
     }
     //make sure passwords match
     if($nPass != $conf){
@@ -321,13 +318,13 @@ function esc_url($url) {
 
 function update_addressBook(){
   //sanitise all form inputs
-   
+
 }
 
 function delete_addressBook($deleteID){
-  
+
     $db = db_connect();
- 
+
 
 	$SQL="SELECT sh_firstname, sh_familyname FROM shaddr WHERE shaddr_id=?";
     $stmt = $db->prepare($SQL);
@@ -339,18 +336,18 @@ function delete_addressBook($deleteID){
     $stmt = $db->prepare($SQL);
     $stmt->bindParam(1, $deleteID);
     $stmt->execute();
-	
-	
+
+
 	echo "<script>
 	alert('".$data[0]['sh_firstname']." ".$data[0]['sh_familyname']." Deleted!');
 	window.location.href='AddressBook.php';
 	</script>";
-	
-	
+
+
 	//window.location.href='AddressBook.php';
-	
+
 	//echo "<script>window.location.href='AddressBook.php'
-	
+
 	/*//echo ('<SCRIPT LANGUAGE=\'JavaScript\'>
     window.alert(\''.$data[0]['sh_firstname'].' '.$data[0]['sh_familyname'].' Deleted!\')
     window.location.href=comp344Ass2_PDO/AddressBook.php\';
