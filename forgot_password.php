@@ -42,7 +42,7 @@
               <div id="site">
                 <?php require 'includes/pagetop.php'; ?>
                 <div id="logonBox">
-                  <form action="includes/forgot.php" method="post" name="email_form">
+                  <form action="forgot.php" method="post" name="email_form">
                       Email: <input type="text" name="email" id = "email" size="35" />
                       <br><br>
 
@@ -53,7 +53,7 @@
                 </div>
                 <?php include 'includes/footer.php'; ?>
               </div>
-              
+
             </body>
           </html>
           <?php

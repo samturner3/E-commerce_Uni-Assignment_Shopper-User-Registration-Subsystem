@@ -1,6 +1,6 @@
 <?php
-  include_once 'db_connect_PDO.php';
-  include_once 'functions2.php';
+  include_once 'includes/db_connect_PDO.php';
+  include_once 'includes/functions2.php';
   sec_session_start();
   $db = db_connect();
   $siteroot = "localhost/comp344Ass2_PDO";
@@ -36,7 +36,7 @@
     $stmt->execute();
 
     //generate reset link and email
-    $link =$siteroot . "/includes/forgot.php?" . $token;
+    $link =$siteroot . "/forgot.php?" . $token;
     //echo $email;
     $message = "Please follow this link to reset your password " . $link;
     //send email to customer
@@ -81,17 +81,12 @@
             <script type="text/JavaScript">
             //validate password format
             function checkPass(form){
-              if (form.nPass.value.length !== 8 || form.conf.value.length !== 8){
-                alert("Passwords must be exactly 8 characters long.  Please try again.");
-                //errorBox("Passwords must be exactly 8 characters long.  Please try again.");
-                //form.password.focus();
-                return false;
+              var re = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})/;
+              if (!re.test(form.nPass.value)) {
+            	alert("Passwords must contain must contains one digit from 0-9, one lowercase character, one uppercase character,one special symbols in the list \"@#$%\", length at least 6 characters and maximum of 20.  Please try again.");
+                  return false;
               }
-              var re = /(?=.*[0-9].*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8}/;
-              if (!re.test(form.nPass.value) || !re.test(form.conf.value)) {
-             	  alert("Passwords must contain at least two numbers, at least one lowercase and at least one uppercase letter, and be 8 characters long.  Please try again.");
-                return false;
-              }
+
               if(form.nPass.value != form.conf.value){
                 alert("New password and confirmation password must match");
                 return false;
@@ -106,10 +101,10 @@
         </head>
         <body class="no_col_2">
             <div id="site">
-              <?php require 'pagetop.php'; ?>
+              <?php require 'includes/pagetop.php'; ?>
               <div id="logonBox">
                 <!--Redirect user to change_password.php when they submit form -->
-                <form action="change_password.php" method="post" name="password_form">
+                <form action="includes/change_password.php" method="post" name="password_form">
 
                     New Password: <input type="password" name="nPass" id="nPass" size="35"/>
                     <br>

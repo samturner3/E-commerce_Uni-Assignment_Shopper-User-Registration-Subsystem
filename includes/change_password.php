@@ -7,8 +7,8 @@
   //print_r($_POST);
   //print_r($_SESSION);
 //If user is changing their password while logged in, execute this
-  $shopper_id = $_SESSION['user_id'];
   if($_POST['pType'] == "change"){
+    $shopper_id = $_SESSION['user_id'];
     if(isset($_POST['oPass'], $_POST['nPass'], $_POST['conf'], $_SESSION['user_id'])){
       change_password($shopper_id);
     }
